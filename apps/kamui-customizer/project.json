@@ -1,0 +1,94 @@
+{
+  "projectType": "application",
+  "root": "apps/kamui-customizer",
+  "sourceRoot": "apps/kamui-customizer/src",
+  "prefix": "fecustomizer-engine",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/kamui-customizer",
+        "index": "apps/kamui-customizer/src/index.html",
+        "main": "apps/kamui-customizer/src/main.ts",
+        "polyfills": "apps/kamui-customizer/src/polyfills.ts",
+        "tsConfig": "apps/kamui-customizer/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/kamui-customizer/src/favicon.ico",
+          "apps/kamui-customizer/src/assets"
+        ],
+        "styles": ["apps/kamui-customizer/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/kamui-customizer/src/environments/environment.ts",
+              "with": "apps/kamui-customizer/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "kamui-customizer:build:production"
+        },
+        "development": {
+          "browserTarget": "kamui-customizer:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "kamui-customizer:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/kamui-customizer/src/**/*.ts",
+          "apps/kamui-customizer/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/kamui-customizer"],
+      "options": {
+        "jestConfig": "apps/kamui-customizer/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

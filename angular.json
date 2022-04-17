@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "kamui-customizer": "apps/kamui-customizer",
+    "kamui-customizer-e2e": "apps/kamui-customizer-e2e"
+  }
+}
