@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/fe-customizer-engine",
+  "sourceRoot": "libs/fe-customizer-engine/src",
+  "prefix": "fec",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/fe-customizer-engine"],
+      "options": {
+        "project": "libs/fe-customizer-engine/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/fe-customizer-engine/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/fe-customizer-engine/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/fe-customizer-engine"],
+      "options": {
+        "jestConfig": "libs/fe-customizer-engine/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/fe-customizer-engine/src/**/*.ts",
+          "libs/fe-customizer-engine/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
