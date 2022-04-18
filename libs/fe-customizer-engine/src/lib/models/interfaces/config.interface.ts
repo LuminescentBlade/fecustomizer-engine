@@ -1,13 +1,14 @@
 export interface FECustomizerConfig {
     bodyType: string,
     title: string,
-    config: any[]
+    config: FECustomizerBodyConfig[]
 };
 export interface FECustomizerBodyConfig {
     name: string,
     title: string,
     dependsOn?: string,
-    assets: any[] | any [][], // TODO: specify image format
+    canBeBlank?: boolean,
+    assets: null | HTMLImageElement | HTMLImageElement[] | HTMLImageElement [][],
     colorSettings?: FECustomizerColorSettings
 }
 
@@ -19,7 +20,6 @@ export interface FECustomizerColorSettings {
 }
 export interface FECustomizerImagePathConfig {
     name: string,
-    directory?: string,
-    fileName?: string,
-    subCategory: FECustomizerBodyConfig[]
+    path?: string,
+    subCategories?: FECustomizerImagePathConfig[]
 }

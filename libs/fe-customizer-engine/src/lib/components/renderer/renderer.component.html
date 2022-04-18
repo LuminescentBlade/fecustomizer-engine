@@ -1,1 +1,6 @@
-bunny
+<ng-container *ngIf="config; else loading">
+    loaded
+</ng-container>
+<ng-template #loading>
+    loading
+</ng-template>
