@@ -64,7 +64,6 @@ export class LoaderService {
   }
 
   getDependentPaths(count: number | boolean, options: string[], ext: string, paths: FECustomizerPathMap,) {
-    console.log(paths, options);
     const subcategories: { name: string, path: string }[] = [];
     for (let i = 1; i <= count; i++) {
       options.forEach((option) => {
