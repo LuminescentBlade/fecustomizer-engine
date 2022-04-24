@@ -1,25 +1,28 @@
-export interface FECustomizerConfig {
+import { FECOptionTitleConfig } from "./loader.interface";
+
+export interface FECConfig {
     bodyType: string,
     title: string,
-    config: FECustomizerBodyConfig[]
+    config: FECBodyConfig[]
 };
-export interface FECustomizerBodyConfig {
+export interface FECBodyConfig {
     name: string,
     title: string,
+    optionLabels: FECOptionTitleConfig['children'],
     dependsOn?: string,
     canBeBlank?: boolean,
-    assets: null | HTMLImageElement | HTMLImageElement[] | HTMLImageElement [][],
-    colorSettings?: FECustomizerColorSettings
+    assets: null | HTMLImageElement | HTMLImageElement[] | HTMLImageElement[][],
+    colorSettings?: FECColorSettings
 }
 
-export interface FECustomizerColorSettings {
+export interface FECColorSettings {
     options?: string[]; // hexcode discrete options
     // TODO: future options, uncomment later
     // useColorPicker?: boolean // add a full colorpicker
     // renderFunction?: (inputs: any)=>{ } // add custom color overlay function
 }
-export interface FECustomizerImagePathConfig {
+export interface FECImagePathConfig {
     name: string,
     path?: string,
-    subCategories?: FECustomizerImagePathConfig[]
+    subCategories?: FECImagePathConfig[]
 }

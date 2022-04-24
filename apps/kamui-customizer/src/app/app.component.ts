@@ -12,12 +12,8 @@ export class AppComponent implements OnInit {
   constructor(private configService: ConfigService) { }
 
   async ngOnInit() {
-    const assetsConfig = this.configService.configureAssets();
-    console.log(assetsConfig);
-    const assets = await loadImagesFromLocal(assetsConfig);
-    console.log(assets);
-    // this.config = this.configService.generateConfig(assets);
-    // console.log(this.config);
+    this.config = await this.configService.getConfig();
+    console.log(this.config);
   }
 
 }

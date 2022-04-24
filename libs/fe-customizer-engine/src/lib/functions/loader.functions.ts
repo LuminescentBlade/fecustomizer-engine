@@ -1,8 +1,8 @@
-import { FECustomizerImagePathConfig } from "../models";
+import { FECImagePathConfig } from "../models";
 
-export async function loadImagesFromLocal(config: FECustomizerImagePathConfig): Promise<any> {
+export async function loadImagesFromLocal(config: FECImagePathConfig): Promise<any> {
     const imagePromises: Promise<any>[] = [];
-    const recursiveLoad = (currentPath: string, currentKey: string | null, currentConfig: FECustomizerImagePathConfig) => {
+    const recursiveLoad = (currentPath: string, currentKey: string | null, currentConfig: FECImagePathConfig) => {
         const nextKey = currentKey ? `${currentKey} ${currentConfig.name}` : currentConfig.name;
         const nextPath = [currentPath, currentConfig.path].join('/');
         if (currentConfig.subCategories?.length) {
