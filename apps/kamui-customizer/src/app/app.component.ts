@@ -14,11 +14,12 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     const assetsConfig = this.configService.configureAssets();
+    console.log(assetsConfig);
     //TODO: offload on to webworker?
     const assets = await loadImagesFromLocal(assetsConfig);
     console.log(assets);
-    this.config = this.configService.generateConfig(assets);
-    console.log(this.config);
+    // this.config = this.configService.generateConfig(assets);
+    // console.log(this.config);
   }
 
 }
