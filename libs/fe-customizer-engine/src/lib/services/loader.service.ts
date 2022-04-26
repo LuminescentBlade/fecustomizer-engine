@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { loadImagesFromLocal } from '../functions';
 import {
+  FECOptionConfig,
   FECBodyConfig,
-  FECConfig,
-  FECImageCache,
   FECImagePathConfig,
   FECLoaderBodyChildOptions,
   FECLoaderBodyConfig,
   FECLoaderBodyOptionItem,
   FECLoaderBodyType,
   FECLoaderConfig,
-  FECLoaderOptions
+  FECLoaderOptions,
+  FECConfig
 } from '../models';
 
 @Injectable({
@@ -20,14 +20,18 @@ export class LoaderService {
 
   constructor() { }
 
-  async getConfig(input: FECLoaderOptions): Promise<FECConfig[]> {
+  async getConfig(input: FECLoaderOptions): Promise<FECConfig> {
     const assetConfig = this.generateImagePathConfig(input);
     const assets = await loadImagesFromLocal(assetConfig);
-    return this.generateConfig(input.bodyOptions, {
+    const bodyConfig = this.generateConfig(input.bodyOptions, {
       baseKey: input.rootKey,
       assets,
       menuOrder: input.menuOrder
     });
+    return {
+      dimensions: input.dimensions,
+      options: bodyConfig
+    };
   }
 
   /**
@@ -163,7 +167,7 @@ export class LoaderService {
     optionName: string,
     option: FECLoaderBodyOptionItem,
     config: FECLoaderConfig
-  ): FECBodyConfig {
+  ): FECOptionConfig {
     const result = this.getConfigWithTitle(optionName, option);
     const key = `${config.baseKey} ${bodyTypeName} ${result.name}`;
     return {
@@ -174,7 +178,7 @@ export class LoaderService {
 
   private getNullOptionConfig(
     optionName: string,
-  ): FECBodyConfig {
+  ): FECOptionConfig {
     return {
       ...this.getConfigWithTitle(optionName),
       assets: null,

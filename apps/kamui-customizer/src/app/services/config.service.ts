@@ -101,11 +101,11 @@ export class ConfigService {
       options: {
         [Options.Body]: { ...this.options[Options.Body], offset: { x: 0, y: 0 } },
         [Options.Hair]: { ...this.options[Options.Hair], offset: { x: 0, y: 0 } },
-        [Options.HairClip]: { ...this.options[Options.HairClip], offset: { x: 0, y: 0 } },
+        [Options.HairClip]: { ...this.options[Options.HairClip], offset: { x: 128, y: 27 } },
         [Options.Features]: { ...this.options[Options.Features], offset: { x: 0, y: 0 } },
         [Options.Expressions]: { ...this.options[Options.Expressions], offset: { x: 0, y: 0 } },
-        [Options.Sweat]: { ...this.options[Options.Sweat], offset: { x: 0, y: 0 } },
-        [Options.Blush]: { ...this.options[Options.Blush], offset: { x: 0, y: 0 } }
+        [Options.Sweat]: { ...this.options[Options.Sweat], offset: { x: 130, y: 85 } },
+        [Options.Blush]: { ...this.options[Options.Blush], offset: { x: 96, y: 64 } }
       },
     },
     [BodyTypes.Female2]: {
@@ -115,11 +115,11 @@ export class ConfigService {
       options: {
         [Options.Body]: { ...this.options[Options.Body], offset: { x: 0, y: 0 } },
         [Options.Hair]: { ...this.options[Options.Hair], offset: { x: 0, y: 0 } },
-        [Options.HairClip]: { ...this.options[Options.HairClip], offset: { x: 0, y: 0 } },
+        [Options.HairClip]: { ...this.options[Options.HairClip], offset: { x: 128, y: 27 } },
         [Options.Features]: { ...this.options[Options.Features], offset: { x: 0, y: 0 } },
         [Options.Expressions]: { ...this.options[Options.Expressions], offset: { x: 0, y: 0 } },
-        [Options.Sweat]: { ...this.options[Options.Sweat], offset: { x: 0, y: 0 } },
-        [Options.Blush]: { ...this.options[Options.Blush], offset: { x: 0, y: 0 } }
+        [Options.Sweat]: { ...this.options[Options.Sweat], offset: { x: 131, y: 101 } },
+        [Options.Blush]: { ...this.options[Options.Blush], offset: { x: 96, y: 75 } }
       }
     },
     [BodyTypes.Male1]: {
@@ -131,8 +131,8 @@ export class ConfigService {
         [Options.Hair]: { ...this.options[Options.Hair], offset: { x: 0, y: 0 } },
         [Options.Features]: { ...this.options[Options.Features], offset: { x: 0, y: 0 } },
         [Options.Expressions]: { ...this.options[Options.Expressions], offset: { x: 0, y: 0 } },
-        [Options.Sweat]: { ...this.options[Options.Sweat], offset: { x: 0, y: 0 } },
-        [Options.Blush]: { ...this.options[Options.Blush], offset: { x: 0, y: 0 } }
+        [Options.Sweat]: { ...this.options[Options.Sweat], offset: { x: 133, y: 79 } },
+        [Options.Blush]: { ...this.options[Options.Blush], offset: { x: 90, y: 45 } }
       }
     },
     [BodyTypes.Male2]: {
@@ -144,8 +144,8 @@ export class ConfigService {
         [Options.Hair]: { ...this.options[Options.Hair], offset: { x: 0, y: 0 } },
         [Options.Features]: { ...this.options[Options.Features], offset: { x: 0, y: 0 } },
         [Options.Expressions]: { ...this.options[Options.Expressions], offset: { x: 0, y: 0 } },
-        [Options.Sweat]: { ...this.options[Options.Sweat], offset: { x: 0, y: 0 } },
-        [Options.Blush]: { ...this.options[Options.Blush], offset: { x: 0, y: 0 } }
+        [Options.Sweat]: { ...this.options[Options.Sweat], offset: { x: 134, y: 70 } },
+        [Options.Blush]: { ...this.options[Options.Blush], offset: { x: 87, y: 42 } }
       }
     }
   }
@@ -155,6 +155,7 @@ export class ConfigService {
     rootPath: this.cornPath,
     imageType: this.ext,
     menuOrder: Object.values(Options),
+    dimensions: {x: 255, y: 255},
     bodyOptions: this.bodyOptions
   };
 

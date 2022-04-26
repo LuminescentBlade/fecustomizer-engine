@@ -1,9 +1,15 @@
-export interface FECConfig {
+import { FECCoordinates } from "./common.interface";
+
+export interface FECConfig{
+    options: FECBodyConfig[],
+    dimensions: FECCoordinates,
+}
+export interface FECBodyConfig {
     bodyType: string,
     title: string,
-    config: FECBodyConfig[]
+    config: FECOptionConfig[]
 };
-export interface FECBodyConfig {
+export interface FECOptionConfig {
     name: string,
     title: string,
     offset: FECCoordinates | null,
@@ -19,14 +25,4 @@ export interface FECColorSettings {
     // TODO: future options, uncomment later
     // useColorPicker?: boolean // add a full colorpicker
     // renderFunction?: (inputs: any)=>{ } // add custom color overlay function
-}
-export interface FECImagePathConfig {
-    name: string,
-    path?: string,
-    subCategories?: FECImagePathConfig[]
-}
-
-export interface FECCoordinates{
-    x: number,
-    y: number
 }

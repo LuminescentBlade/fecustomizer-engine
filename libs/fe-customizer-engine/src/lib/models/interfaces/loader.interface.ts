@@ -1,8 +1,11 @@
+import { FECCoordinates } from "./common.interface"
+
 export interface FECLoaderOptions {
     rootKey: string,
     rootPath: string,
     imageType: string,
     menuOrder: string[],
+    dimensions: FECCoordinates,
     bodyOptions: FECLoaderBodyConfig
 }
 export interface FECLoaderBodyConfig {
@@ -44,4 +47,10 @@ export interface FECLoaderConfig {
     baseKey: string,
     assets: FECImageCache,
     menuOrder: string[]
+}
+
+export interface FECImagePathConfig {
+    name: string,
+    path?: string,
+    subCategories?: FECImagePathConfig[]
 }
