@@ -1,5 +1,3 @@
-import { FECOptionTitleConfig } from "./loader.interface";
-
 export interface FECConfig {
     bodyType: string,
     title: string,
@@ -8,9 +6,10 @@ export interface FECConfig {
 export interface FECBodyConfig {
     name: string,
     title: string,
-    optionLabels: FECOptionTitleConfig['children'],
+    offset: FECCoordinates | null,
+    optionLabels?: string[]
     dependsOn?: string,
-    canBeBlank?: boolean,
+    canBeBlank: boolean,
     assets: null | HTMLImageElement | HTMLImageElement[] | HTMLImageElement[][],
     colorSettings?: FECColorSettings
 }
@@ -25,4 +24,9 @@ export interface FECImagePathConfig {
     name: string,
     path?: string,
     subCategories?: FECImagePathConfig[]
+}
+
+export interface FECCoordinates{
+    x: number,
+    y: number
 }

@@ -13,7 +13,5 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     this.config = await this.configService.getConfig();
-    console.log(this.config);
   }
-
 }

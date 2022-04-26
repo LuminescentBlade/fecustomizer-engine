@@ -1,44 +1,47 @@
-export interface FECBodyOptions {
-    [bodyKey: string]: FECBodyOptionItem
+export interface FECLoaderOptions {
+    rootKey: string,
+    rootPath: string,
+    imageType: string,
+    menuOrder: string[],
+    bodyOptions: FECLoaderBodyConfig
+}
+export interface FECLoaderBodyConfig {
+    [key: string]: FECLoaderBodyType
 }
 
-export interface FECLoadBase {
-    name: string,
-    path: string
+export interface FECLoaderBodyType {
+    title: string,
+    path: string,
+    offset: { x: number, y: number }
+    options: FECLoaderBodyOptions
 }
 
-export interface FECBodyOptionItem {
-    [optionKey: string]: boolean | number | FECDependantOptionItem
+export interface FECLoaderBodyOptions {
+    [key: string]: FECLoaderBodyOptionItem
 }
 
-export interface FECDependantOptionItem {
-    dependsOn: string,
-    options: string[]
-}
-export interface FECPathMap {
-    [key: string]: string
+export interface FECLoaderBodyOptionItem {
+    title: string,
+    path: string,
+    offset: { x: number, y: number },
+    childOptions?: FECLoaderBodyChildOptions,
+    dependsOn?: string,
+    count?: number,
+    toggleable?: boolean,
+    canBeBlank?: boolean,
 }
 
-export interface FECOptionTitles {
-    bodyTypes: {
-        [key: string]: string
-    },
-    options: {
-        [key: string]: string | FECOptionTitleConfig
+export interface FECLoaderBodyChildOptions{
+    [key: string | number]: {
+        title: string,
+        path?: string
     }
 }
-
-export interface FECOptionTitleConfig {
-    title: string,
-    children: string[] | { [key: string]: string }
-}
-
 export interface FECImageCache {
     [key: string]: HTMLImageElement
 };
 export interface FECLoaderConfig {
     baseKey: string,
     assets: FECImageCache,
-    titles: FECOptionTitles,
     menuOrder: string[]
 }

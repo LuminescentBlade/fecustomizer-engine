@@ -1,5 +1,17 @@
 import { Injectable } from '@angular/core';
-import { FECBodyOptionItem, FECBodyOptions, FECDependantOptionItem, FECImagePathConfig, FECLoadBase, FECLoaderConfig, FECOptionTitleConfig, FECOptionTitles, FECPathMap } from '../models';
+import { loadImagesFromLocal } from '../functions';
+import {
+  FECBodyConfig,
+  FECConfig,
+  FECImageCache,
+  FECImagePathConfig,
+  FECLoaderBodyChildOptions,
+  FECLoaderBodyConfig,
+  FECLoaderBodyOptionItem,
+  FECLoaderBodyType,
+  FECLoaderConfig,
+  FECLoaderOptions
+} from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -8,62 +20,59 @@ export class LoaderService {
 
   constructor() { }
 
+  async getConfig(input: FECLoaderOptions): Promise<FECConfig[]> {
+    const assetConfig = this.generateImagePathConfig(input);
+    const assets = await loadImagesFromLocal(assetConfig);
+    return this.generateConfig(input.bodyOptions, {
+      baseKey: input.rootKey,
+      assets,
+      menuOrder: input.menuOrder
+    });
+  }
+
   /**
    * IMAGE LOADING CONFIG 
    */
 
-  /**
-   * 
-   * @param base 
-   * @param bodyOptions 
-   * @param paths 
-   * @param ext 
-   * @returns 
-   */
   generateImagePathConfig(
-    base: FECLoadBase,
-    bodyOptions: FECBodyOptions,
-    paths: FECPathMap,
-    ext: string
+    input: FECLoaderOptions
   ): FECImagePathConfig {
-    const subCategories = Object.keys(bodyOptions).map(bodyType => {
-      const options = bodyOptions[bodyType];
+    const { rootKey, rootPath, imageType, bodyOptions } = input;
+    const subCategories = Object.keys(bodyOptions).map(bodyTypeName => {
+      const bodyType: FECLoaderBodyType = bodyOptions[bodyTypeName];
       const optionConfig: FECImagePathConfig[] = [];
-      for (const option of Object.keys(options)) {
-        const optionValue = options[option];
+      const bodyTypeOptions = bodyType.options;
+      for (const optionName of Object.keys(bodyType.options)) {
+        const option = bodyTypeOptions[optionName];
         this.doOnOptionType(
-          optionValue,
-          (isToggleOption) => { // if boolean
-            optionConfig.push({ name: option, path: `${paths[option]}${ext}` });
+          option,
+          () => { // if boolean
+            optionConfig.push({ name: optionName, path: `${option.path}.${imageType}` });
           },
           (count) => { // if number
-            const optionSubCategories = this.getGeneralPaths(count, ext);
-            optionConfig.push({ name: option, path: paths[option], subCategories: optionSubCategories })
+            const optionSubCategories = this.getGeneralPaths(count, imageType);
+            optionConfig.push({ name: optionName, path: option.path, subCategories: optionSubCategories })
           },
-          (config) => { // if object
-            const dependsOn = config.dependsOn;
-            const dependsOnConfig = options[dependsOn];
-            if (typeof dependsOnConfig === 'object') {
-              throw Error('do this shit later');
-            }
+          (dependsOn) => { // if object
+            const dependsOnConfig = bodyTypeOptions[dependsOn];
             const optionSubCategories = this.getDependentPaths(
-              dependsOnConfig,
-              config.options,
-              ext,
-              paths
+              dependsOnConfig.count!,
+              option.childOptions!,
+              imageType
             );
-            optionConfig.push({ name: option, path: paths[option], subCategories: optionSubCategories })
+            optionConfig.push({ name: optionName, path: option.path, subCategories: optionSubCategories })
           });
       }
       const config: FECImagePathConfig = {
-        name: bodyType,
-        path: paths[bodyType],
+        name: bodyTypeName,
+        path: bodyType.path,
         subCategories: optionConfig
       };
       return config;
     });
     return {
-      ...base,
+      name: rootKey,
+      path: rootPath,
       subCategories
     }
   }
@@ -73,19 +82,19 @@ export class LoaderService {
     for (let i = 1; i <= count; i++) {
       subcategories.push({
         name: `${i}`,
-        path: `${i}${ext}`
+        path: `${i}.${ext}`
       });
     }
     return subcategories;
   }
 
-  private getDependentPaths(count: number | boolean, options: string[], ext: string, paths: FECPathMap,) {
+  private getDependentPaths(count: number, options: FECLoaderBodyChildOptions, ext: string) {
     const subcategories: { name: string, path: string }[] = [];
     for (let i = 1; i <= count; i++) {
-      options.forEach((option) => {
+      Object.keys(options).forEach((option) => {
         subcategories.push({
           name: `${i}_${option}`,
-          path: `${i}_${paths[option]}${ext}`
+          path: `${i}_${options[option].path}.${ext}`
         });
       });
     }
@@ -97,85 +106,92 @@ export class LoaderService {
    */
 
   generateConfig(
-    bodyOptions: FECBodyOptions,
-    config: FECLoaderConfig
+    bodyOptions: FECLoaderBodyConfig,
+    config: FECLoaderConfig,
   ) {
-    return Object.keys(bodyOptions).map((bodyType) => ({
-      bodyType: bodyType,
-      title: config.titles.bodyTypes[bodyType],
-      config: this.generateConfigForBodyType(bodyType, bodyOptions[bodyType], config)
+    return Object.keys(bodyOptions).map((bodyTypeName) => ({
+      bodyType: bodyTypeName,
+      title: bodyOptions[bodyTypeName].title,
+      config: this.generateConfigForBodyType(bodyTypeName, bodyOptions[bodyTypeName], config)
     }));
   }
 
-  private generateConfigForBodyType(bodyType: string, bodyConfig: FECBodyOptionItem, config: FECLoaderConfig) {
-    return config.menuOrder.map(option => {
+  private generateConfigForBodyType(bodyTypeName: string, bodyType: FECLoaderBodyType, config: FECLoaderConfig) {
+    return config.menuOrder.map(optionName => {
+      const options = bodyType.options;
+      const option = options[optionName];
       return this.doOnOptionType(
-        bodyConfig[option],
-        (hasOption) => { // if boolean
-          return this.getToggleOptionConfig(bodyType, option, config);
+        option,
+        () => { // if boolean
+          return this.getToggleOptionConfig(bodyTypeName, optionName, option, config);
         },
         (optionCount) => { // if number
-          return this.getStandardOptionConfig(bodyType, option, optionCount, config);
+          return this.getStandardOptionConfig(bodyTypeName, optionName, option, config);
         },
-        (optionConfig) => { // if object
+        (dependsOn) => { // if object
           return this.getDependentOptionConfig(
-            bodyType,
-            //@ts-ignore
+            bodyTypeName,
+            optionName,
             option,
-            optionConfig.dependsOn,
-            //@ts-ignore // we should assume that the dependsOn option does not depend on more things
-            bodyConfig[optionConfig.dependsOn],
-            optionConfig.options,
+            dependsOn,
+            options[dependsOn].count!,
             config
           );
         },
         () => { // null
-          return this.getNullOptionConfig(option, config)
+          return this.getNullOptionConfig(optionName)
         });
 
     });
   }
 
-  private getToggleOptionConfig(bodyType: string, option: string, config: FECLoaderConfig) {
-    const key = `${config.baseKey} ${bodyType} ${option}`
+  private getToggleOptionConfig(
+    bodyTypeName: string,
+    optionName: string,
+    option: FECLoaderBodyOptionItem,
+    config: FECLoaderConfig
+  ) {
+    const key = `${config.baseKey} ${bodyTypeName} ${optionName}`
     return {
-      name: option,
-      title: config.titles.options[option],
+      ...this.getConfigWithTitle(optionName, option),
       assets: config.assets[key]
     }
   };
 
   private getStandardOptionConfig(
-    bodyType: string,
-    option: string,
-    count: number,
+    bodyTypeName: string,
+    optionName: string,
+    option: FECLoaderBodyOptionItem,
     config: FECLoaderConfig
-  ) {
-    const result = this.getConfigWithTitle(option, config.titles);
-    const key = `${config.baseKey} ${bodyType} ${result.name}`;
+  ): FECBodyConfig {
+    const result = this.getConfigWithTitle(optionName, option);
+    const key = `${config.baseKey} ${bodyTypeName} ${result.name}`;
     return {
       ...result,
-      assets: this.getAssetsForType(key, count, config.assets)
+      assets: this.getAssetsForType(key, option.count!, config.assets)
     }
   }
 
   private getNullOptionConfig(
-    option: string,
-    config: FECLoaderConfig
-  ) {
-    return this.getConfigWithTitle(option, config.titles);
+    optionName: string,
+  ): FECBodyConfig {
+    return {
+      ...this.getConfigWithTitle(optionName),
+      assets: null,
+    }
   }
 
   private getDependentOptionConfig(
-    bodyType: string,
-    option: string,
+    bodyTypeName: string,
+    optionName: string,
+    options: FECLoaderBodyOptionItem,
     dependsOn: string,
     numDependsOnOptions: number,
-    optionList: string[],
     config: FECLoaderConfig
   ) {
-    const result = this.getConfigWithTitle(option, config.titles);
-    const key = `${config.baseKey} ${bodyType} ${result.name}`;
+    const result = this.getConfigWithTitle(optionName, options);
+    const key = `${config.baseKey} ${bodyTypeName} ${result.name}`;
+    const optionList = Object.keys(options.childOptions!);
     return {
       ...result,
       assets: this.getAssetsForType(key, numDependsOnOptions, config.assets, optionList),
@@ -204,35 +220,46 @@ export class LoaderService {
     return items;
   };
 
-  private getConfigWithTitle(option: string, titles: FECOptionTitles) {
-    const titleConfig = titles.options[option];
-    if (typeof titleConfig === 'string') {
+  private getConfigWithTitle(optionName: string, options?: FECLoaderBodyOptionItem) {
+    if (!options) {
       return {
-        name: option,
-        title: titleConfig
+        name: optionName,
+        title: '--',
+        offset: null,
+        canBeBlank: true
+      }
+    }
+    const baseConfig = {
+      name: optionName,
+      title: options.title,
+      offset: options.offset,
+      canBeBlank: options.canBeBlank || false
+    };
+    if (options.childOptions) {
+      return {
+        ...baseConfig,
+        optionLabels: Object.values(options.childOptions).map(item => item.title)
       }
     } else {
       return {
-        name: option,
-        title: titleConfig.title,
-        optionLabels: titleConfig.children
+        ...baseConfig
       }
     }
   }
 
   private doOnOptionType(
-    value: boolean | number | { dependsOn: string, options: string[] },
-    onIfBoolean: (v: boolean) => any,
+    option: FECLoaderBodyOptionItem,
+    onIfToggleable: () => any,
     onIfNumber: (v: number) => any,
-    onIfObject: (v: { dependsOn: string, options: string[] }) => any,
+    onIfDependency: (v: string) => any,
     onNullObject?: () => any
   ) {
-    if (typeof value === 'boolean') {
-      return onIfBoolean(value);
-    } else if (typeof value === 'number') {
-      return onIfNumber(value);
-    } else if (value) { // if not true or number it's the dependencies case
-      return onIfObject(value);
+    if (option?.toggleable) {
+      return onIfToggleable();
+    } else if (option?.count) {
+      return onIfNumber(option.count);
+    } else if (option?.dependsOn) {
+      return onIfDependency(option.dependsOn);
     } else if (onNullObject) {
       return onNullObject();
     }
