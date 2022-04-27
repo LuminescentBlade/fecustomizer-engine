@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FECCoordinates, FECCustomizationOption } from '../../models';
 @Component({
   selector: 'fec-layer-renderer',
@@ -6,6 +6,7 @@ import { FECCoordinates, FECCustomizationOption } from '../../models';
   styleUrls: ['./layer-renderer.component.scss'],
 })
 export class LayerRendererComponent implements OnInit, OnChanges {
+  @HostBinding('class.fec-layer-renderer') baseClass = true;
   @Input() data: FECCustomizationOption;
   @Input() index: number;
   @Input() dependsOnIndex: number | null;

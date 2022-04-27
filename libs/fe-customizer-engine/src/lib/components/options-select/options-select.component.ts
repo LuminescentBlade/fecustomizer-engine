@@ -6,7 +6,7 @@ import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@an
   styleUrls: ['./options-select.component.scss'],
 })
 export class OptionsSelectComponent implements OnInit {
-  @HostBinding('class.fec-options-select')
+  @HostBinding('class.fec-options-select') baseClass = true;
   @HostBinding('class.fec-options-select--disabled') @Input() disabled = false;
   @Input() title: string = '--';
   @Input() value: number;

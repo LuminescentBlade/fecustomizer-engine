@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
 import { FECBodyType, FECConfig, FECCustomizationOption } from '../../models';
 
 @Component({
@@ -7,6 +7,7 @@ import { FECBodyType, FECConfig, FECCustomizationOption } from '../../models';
   styleUrls: ['./renderer.component.scss'],
 })
 export class RendererComponent implements OnInit {
+  @HostBinding('class.fec-renderer') baseClass = true;
   @Input() complete: number;
   @Input() set config(config: FECConfig) {
     this._config = config;

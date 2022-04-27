@@ -1,6 +1,11 @@
 <ng-container *ngIf="config; else loading">
-    <canvas #canvas [height]="config.dimensions.y" [width]="config.dimensions.x"></canvas>
-    <div class="">
+    <div 
+        class="fec-renderer__canvas-container"
+        [ngStyle]="{'height': config.dimensions.y, 'width':config.dimensions.x}"
+    >
+        <canvas class="fec-renderer__canvas" #canvas [height]="config.dimensions.y" [width]="config.dimensions.x"></canvas>
+    </div>
+    <div class="fec-renderer__controls">
         <fec-options-select 
             [title]="currentBodyType.title"
             [min]="min"
@@ -8,8 +13,8 @@
             [value]="bodyTypeIndex"
             (valueChange)="bodyTypeIndex = $event"
         ></fec-options-select>
-    </div>
-    <ul>
+    
+    <ul class="fec-renderer__options">
         <li *ngFor="let menuItem of currentBodyType.config">
             <fec-layer-renderer 
                 [data]="menuItem" 
@@ -21,6 +26,7 @@
             ></fec-layer-renderer>
         </li>
     </ul>
+    </div>
 </ng-container>
 <ng-template #loading>
     loading {{complete | percent}}
