@@ -1,15 +1,16 @@
 import { FECColorSettings, FECCoordinates } from "./common.interface";
 
 export interface FECConfig{
-    options: FECBodyConfig[],
+    options: FECBodyType[],
+    menuOrder: string[],
     dimensions: FECCoordinates,
 }
-export interface FECBodyConfig {
+export interface FECBodyType {
     bodyType: string,
     title: string,
-    config: FECOptionConfig[]
+    config: FECCustomizationOption[]
 };
-export interface FECOptionConfig {
+export interface FECCustomizationOption {
     name: string,
     title: string,
     offset: FECCoordinates | null,

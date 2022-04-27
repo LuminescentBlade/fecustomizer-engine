@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { loadImagesFromLocal } from '../functions';
 import {
-  FECOptionConfig,
-  FECBodyConfig,
+  FECCustomizationOption,
+  FECBodyType,
   FECImagePathConfig,
   FECLoaderBodyChildOptions,
   FECLoaderBodyConfig,
@@ -30,7 +30,8 @@ export class LoaderService {
     });
     return {
       dimensions: input.dimensions,
-      options: bodyConfig
+      options: bodyConfig,
+      menuOrder: input.menuOrder
     };
   }
 
@@ -158,6 +159,7 @@ export class LoaderService {
     const key = `${config.baseKey} ${bodyTypeName} ${optionName}`
     return {
       ...this.getConfigWithTitle(optionName, option),
+      canBeBlank: true, // by default with toggles
       assets: config.assets[key]
     }
   };
@@ -167,7 +169,7 @@ export class LoaderService {
     optionName: string,
     option: FECLoaderBodyOptionItem,
     config: FECLoaderConfig
-  ): FECOptionConfig {
+  ): FECCustomizationOption {
     const result = this.getConfigWithTitle(optionName, option);
     const key = `${config.baseKey} ${bodyTypeName} ${result.name}`;
     return {
@@ -178,7 +180,7 @@ export class LoaderService {
 
   private getNullOptionConfig(
     optionName: string,
-  ): FECOptionConfig {
+  ): FECCustomizationOption {
     return {
       ...this.getConfigWithTitle(optionName),
       assets: null,
@@ -224,7 +226,7 @@ export class LoaderService {
     return items;
   };
 
-  private getConfigWithTitle(optionName: string, options?: FECLoaderBodyOptionItem): FECOptionConfig {
+  private getConfigWithTitle(optionName: string, options?: FECLoaderBodyOptionItem): FECCustomizationOption {
     if (!options) {
       return {
         name: optionName,
@@ -235,7 +237,7 @@ export class LoaderService {
         assets: null
       }
     }
-    const baseConfig: FECOptionConfig = {
+    const baseConfig: FECCustomizationOption = {
       name: optionName,
       title: options.title,
       offset: options.offset,

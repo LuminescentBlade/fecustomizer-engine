@@ -8,13 +8,13 @@ enum BodyTypes {
   Male2 = 'b_male2'
 };
 enum Options {
-  Body = 'o_body',
-  Hair = 'o_hair',
   HairClip = 'o_hairclip',
+  Hair = 'o_hair',
+  Sweat = 'o_sweat',
+  Blush = 'o_blush',
   Features = 'o_features',
   Expressions = 'o_expressions',
-  Sweat = 'o_sweat',
-  Blush = 'o_blush'
+  Body = 'o_body'
 };
 enum Expressions {
   Normal = 'e_normal',

@@ -1,1 +1,8 @@
-<p>layer-renderer works!</p>
+<fec-options-select 
+    [title]="title"
+    [disabled]="!data.assets"
+    [value]="index"
+    [min]="min"
+    [max]="max"
+    (valueChange)="indexChange.emit($event)"
+></fec-options-select>

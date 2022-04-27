@@ -2,7 +2,7 @@ import { Injector, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RendererComponent } from './components/renderer/renderer.component';
 import { createCustomElement } from '@angular/elements';
-import { OptionsSelectorComponent } from './components/options-selector/options-selector.component';
+import { OptionsSelectComponent } from './components/options-select/options-select.component';
 import { LayerRendererComponent } from './components/layer-renderer/layer-renderer.component';
 import { ColorPickerDirective } from './directives/color-picker.directive';
 
@@ -10,7 +10,7 @@ import { ColorPickerDirective } from './directives/color-picker.directive';
   imports: [CommonModule],
   declarations: [
     RendererComponent,
-    OptionsSelectorComponent,
+    OptionsSelectComponent,
     LayerRendererComponent,
     ColorPickerDirective,
   ],
