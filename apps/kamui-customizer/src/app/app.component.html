@@ -1,1 +1,4 @@
-<fec-renderer [config]="config"></fec-renderer>
+<ng-container *ngIf="this.config$ | async as config">
+    <fec-renderer [config]="config.data" [complete]="config.complete"></fec-renderer>
+</ng-container>
+

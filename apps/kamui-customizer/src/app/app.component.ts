@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { loadImagesFromLocal } from 'fe-customizer-engine';
+import { Observable } from 'rxjs';
 import { ConfigService } from './services/config.service';
 @Component({
   selector: 'kamui-customizer',
@@ -7,12 +7,11 @@ import { ConfigService } from './services/config.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public config: any;
+  public config$: Observable<any>;
 
   constructor(private configService: ConfigService) { }
 
   async ngOnInit() {
-    this.config = await this.configService.getConfig();
-    console.log(this.config);
+    this.config$ = this.configService.getConfig();
   }
 }

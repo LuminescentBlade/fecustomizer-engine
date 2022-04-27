@@ -20,3 +20,8 @@ export interface FECCustomizationOption {
     assets: null | HTMLImageElement | HTMLImageElement[] | HTMLImageElement[][],
     colorSettings?: FECColorSettings
 }
+
+export interface FECConfigLoad{
+    complete: number,
+    data: FECConfig | null
+}

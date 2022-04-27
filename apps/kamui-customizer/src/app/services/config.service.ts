@@ -170,7 +170,7 @@ export class ConfigService {
 
   constructor(private loader: LoaderService) { }
 
-  async getConfig() {
+  getConfig() {
     return this.loader.getConfig(this.inputConfig);
   }
 }

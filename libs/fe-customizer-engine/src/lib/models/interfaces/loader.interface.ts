@@ -55,3 +55,9 @@ export interface FECImagePathConfig {
     path?: string,
     subCategories?: FECImagePathConfig[]
 }
+
+export interface FECImageLoad{
+    count: number,
+    loaded: number,
+    images: FECImageCache | null
+}

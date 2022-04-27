@@ -7,6 +7,7 @@ import { FECBodyType, FECConfig, FECCustomizationOption } from '../../models';
   styleUrls: ['./renderer.component.scss'],
 })
 export class RendererComponent implements OnInit {
+  @Input() complete: number;
   @Input() set config(config: FECConfig) {
     this._config = config;
     if (config) {
