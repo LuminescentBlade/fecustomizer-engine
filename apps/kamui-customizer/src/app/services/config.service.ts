@@ -40,7 +40,16 @@ export class ConfigService {
     [Options.Hair]: {
       title: 'Hair',
       count: 12,
-      path: 'hair'
+      path: 'hair',
+      colorSettings: {
+        options: [
+          "#F1EFE6","#C35654","#D1876A","#E9D7C1","#A6D1A2","#7AB6C0",
+          "#90A6CF","#C9A0D1","#F9D7DB","#C1A798","#9FA0A1","#9B3F42",
+          "#996049","#CABFA2","#698059","#377781","#4A5877","#81608A",
+          "#EAAFB2","#817062","#5A5850","#E75860","#F1976E","#E9D699",
+          "#89CE84","#7FE0DB","#4881B3","#AB7ED3","#F28FA9","#69473D"
+        ]
+      },
     },
     [Options.HairClip]: {
       title: 'Hair Clip',

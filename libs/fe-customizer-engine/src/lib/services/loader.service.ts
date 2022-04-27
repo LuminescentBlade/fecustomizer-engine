@@ -224,20 +224,24 @@ export class LoaderService {
     return items;
   };
 
-  private getConfigWithTitle(optionName: string, options?: FECLoaderBodyOptionItem) {
+  private getConfigWithTitle(optionName: string, options?: FECLoaderBodyOptionItem): FECOptionConfig {
     if (!options) {
       return {
         name: optionName,
         title: '--',
+        //@ts-ignore,
         offset: null,
-        canBeBlank: true
+        canBeBlank: true,
+        assets: null
       }
     }
-    const baseConfig = {
+    const baseConfig: FECOptionConfig = {
       name: optionName,
       title: options.title,
       offset: options.offset,
-      canBeBlank: options.canBeBlank || false
+      canBeBlank: options.canBeBlank || false,
+      colorSettings: options.colorSettings,
+      assets: null
     };
     if (options.childOptions) {
       return {

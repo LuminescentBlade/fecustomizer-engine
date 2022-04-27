@@ -1,4 +1,4 @@
-import { FECCoordinates } from "./common.interface";
+import { FECColorSettings, FECCoordinates } from "./common.interface";
 
 export interface FECConfig{
     options: FECBodyConfig[],
@@ -18,11 +18,4 @@ export interface FECOptionConfig {
     canBeBlank: boolean,
     assets: null | HTMLImageElement | HTMLImageElement[] | HTMLImageElement[][],
     colorSettings?: FECColorSettings
-}
-
-export interface FECColorSettings {
-    options?: string[]; // hexcode discrete options
-    // TODO: future options, uncomment later
-    // useColorPicker?: boolean // add a full colorpicker
-    // renderFunction?: (inputs: any)=>{ } // add custom color overlay function
 }

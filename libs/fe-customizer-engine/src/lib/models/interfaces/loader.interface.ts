@@ -1,4 +1,4 @@
-import { FECCoordinates } from "./common.interface"
+import { FECColorSettings, FECCoordinates } from "./common.interface"
 
 export interface FECLoaderOptions {
     rootKey: string,
@@ -32,6 +32,7 @@ export interface FECLoaderBodyOptionItem {
     count?: number,
     toggleable?: boolean,
     canBeBlank?: boolean,
+    colorSettings?: FECColorSettings
 }
 
 export interface FECLoaderBodyChildOptions{
