@@ -1,8 +1,9 @@
 import { FECColorSettings, FECCoordinates } from "./common.interface";
 
-export interface FECConfig{
+export interface FECConfig {
     options: FECBodyType[],
     menuOrder: string[],
+    layerOrder: string[],
     dimensions: FECCoordinates,
 }
 export interface FECBodyType {
@@ -20,8 +21,7 @@ export interface FECCustomizationOption {
     assets: null | HTMLImageElement | HTMLImageElement[] | HTMLImageElement[][],
     colorSettings?: FECColorSettings
 }
-
-export interface FECConfigLoad{
+export interface FECConfigLoad {
     complete: number,
     data: FECConfig | null
 }

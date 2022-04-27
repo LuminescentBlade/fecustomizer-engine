@@ -40,7 +40,8 @@ export class LoaderService {
             data:{
               dimensions: input.dimensions,
               options: bodyConfig,
-              menuOrder: input.menuOrder
+              menuOrder: input.menuOrder,
+              layerOrder: input.layerOrder
             }
           }
         }

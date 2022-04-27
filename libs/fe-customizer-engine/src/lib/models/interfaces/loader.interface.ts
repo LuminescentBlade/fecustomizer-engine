@@ -5,6 +5,7 @@ export interface FECLoaderOptions {
     rootPath: string,
     imageType: string,
     menuOrder: string[],
+    layerOrder: string[],
     dimensions: FECCoordinates,
     bodyOptions: FECLoaderBodyConfig
 }

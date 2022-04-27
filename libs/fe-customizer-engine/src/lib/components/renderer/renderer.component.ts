@@ -87,13 +87,13 @@ export class RendererComponent implements OnInit {
     // only render when we have all items. with the way this is setup, even empty options
     // should give a blank canvas and not null.
     // this way we don't render the canvas like 7 times whenever the 
-    if (this.canvasFilledCount < this.config.menuOrder.length) {
+    if (this.canvasFilledCount < this.config.layerOrder.length) {
       return;
     }
     this.ctx!.clearRect(0, 0, this.config.dimensions.x, this.config.dimensions.y);
-    const menuOrder = this.config.menuOrder;
-    for (let i = menuOrder.length - 1; i >= 0; i--) {
-      const name = menuOrder[i];
+    const layerOrder = this.config.layerOrder;
+    for (let i = layerOrder.length - 1; i >= 0; i--) {
+      const name = layerOrder[i];
       const item = this.renderCache[name];
       if (item) {
         this.ctx!.drawImage(item, 0, 0);

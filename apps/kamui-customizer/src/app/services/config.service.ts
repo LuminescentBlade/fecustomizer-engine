@@ -163,7 +163,8 @@ export class ConfigService {
     rootKey: this.cornKey,
     rootPath: this.cornPath,
     imageType: this.ext,
-    menuOrder: Object.values(Options),
+    menuOrder: [Options.Body, Options.Hair, Options.HairClip, Options.Features, Options.Expressions, Options.Blush, Options.Sweat],
+    layerOrder: [Options.HairClip, Options.Hair, Options.Features, Options.Sweat, Options.Blush, Options.Expressions, Options.Body],
     dimensions: {x: 255, y: 255},
     bodyOptions: this.bodyOptions
   };
