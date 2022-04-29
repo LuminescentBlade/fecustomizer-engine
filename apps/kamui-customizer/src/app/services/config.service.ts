@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 import { LoaderService, FECLoaderBodyConfig, FECLoaderOptions } from 'fe-customizer-engine';
 
 enum BodyTypes {
@@ -29,7 +30,7 @@ enum Expressions {
 })
 export class ConfigService {
   private cornKey = 'CORN';
-  private cornPath = './assets/corn';
+  private cornPath = this._baseHref + '/assets/corn';
   private ext = 'png';
   private options = {
     [Options.Body]: {
@@ -43,11 +44,11 @@ export class ConfigService {
       path: 'hair',
       colorSettings: {
         options: [
-          "#F1EFE6","#C35654","#D1876A","#E9D7C1","#A6D1A2","#7AB6C0",
-          "#90A6CF","#C9A0D1","#F9D7DB","#C1A798","#9FA0A1","#9B3F42",
-          "#996049","#CABFA2","#698059","#377781","#4A5877","#81608A",
-          "#EAAFB2","#817062","#5A5850","#E75860","#F1976E","#E9D699",
-          "#89CE84","#7FE0DB","#4881B3","#AB7ED3","#F28FA9","#69473D"
+          "#F1EFE6", "#C35654", "#D1876A", "#E9D7C1", "#A6D1A2", "#7AB6C0",
+          "#90A6CF", "#C9A0D1", "#F9D7DB", "#C1A798", "#9FA0A1", "#9B3F42",
+          "#996049", "#CABFA2", "#698059", "#377781", "#4A5877", "#81608A",
+          "#EAAFB2", "#817062", "#5A5850", "#E75860", "#F1976E", "#E9D699",
+          "#89CE84", "#7FE0DB", "#4881B3", "#AB7ED3", "#F28FA9", "#69473D"
         ]
       },
     },
@@ -165,11 +166,13 @@ export class ConfigService {
     imageType: this.ext,
     menuOrder: [Options.Body, Options.Hair, Options.HairClip, Options.Features, Options.Expressions, Options.Blush, Options.Sweat],
     layerOrder: [Options.HairClip, Options.Hair, Options.Features, Options.Sweat, Options.Blush, Options.Expressions, Options.Body],
-    dimensions: {x: 255, y: 255},
+    dimensions: { x: 255, y: 255 },
     bodyOptions: this.bodyOptions
   };
 
-  constructor(private loader: LoaderService) { }
+  constructor(private loader: LoaderService, @Inject(APP_BASE_HREF) private _baseHref: string) {
+
+  }
 
   getConfig() {
     return this.loader.getConfig(this.inputConfig);
