@@ -30,7 +30,7 @@ enum Expressions {
 })
 export class ConfigService {
   private cornKey = 'CORN';
-  private cornPath = ['.',this._baseHref.split('/').join(''),'assets/corn'].join('/');
+  private cornPath = this.getBasePath('assets/corn');
   private ext = 'png';
   private options = {
     [Options.Body]: {
@@ -171,10 +171,16 @@ export class ConfigService {
   };
 
   constructor(private loader: LoaderService, @Inject(APP_BASE_HREF) private _baseHref: string) {
-
+    console.log(this._baseHref.split('/').join(''));
   }
 
   getConfig() {
     return this.loader.getConfig(this.inputConfig);
+  }
+
+  getBasePath(path:string){
+    return ['.',this._baseHref.split('/').join(''), path]
+    .filter(item=>item.length)
+    .join('/');
   }
 }

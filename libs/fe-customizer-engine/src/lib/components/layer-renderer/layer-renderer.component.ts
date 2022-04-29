@@ -7,7 +7,7 @@ import { FECCoordinates, FECCustomizationOption } from '../../models';
   templateUrl: './layer-renderer.component.html',
   styleUrls: ['./layer-renderer.component.scss'],
 })
-export class LayerRendererComponent implements OnInit, OnChanges {
+export class LayerRendererComponent implements OnChanges {
   @HostBinding('class.fec-layer-renderer') baseClass = true;
   @Input() data: FECCustomizationOption;
   @Input() index: number;
@@ -50,16 +50,16 @@ export class LayerRendererComponent implements OnInit, OnChanges {
     if (!this.data) {
       return;
     }
-    if (changes['data']?.currentValue){
-      this.setRender();
+    this.setRender();
+    if(changes['data']?.currentValue){
+      this.setMinMax();
     }
     this.title = this.getTitle();
-    // setting random and data should be at the same time only on init
+    
     if (!this.data?.colorSettings) {
       this.renderBasicLayer();
     }
   }
-  ngOnInit(): void { }
 
   getTitle() {
     if (!this.currentRenderList?.length) {
@@ -114,6 +114,9 @@ export class LayerRendererComponent implements OnInit, OnChanges {
     } else if (this.data.assets instanceof HTMLImageElement) {
       this.currentRenderItem = this.index === this.blankIndex ? null : this.data.assets;
     }
+  }
+
+  setMinMax(){
     this.min = this.data.canBeBlank ? this.blankIndex : 0;
     this.max = this.currentRenderList?.length - 1 || 0;
     const randFunction = this.createRandFunction(this.min, this.max);
