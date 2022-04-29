@@ -9,7 +9,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "deploy": "ng build kamui-customizer --prod=true --outputPath=docs && cp docs/index.html docs/404.html"
+    "deploy": "ng build kamui-customizer --prod=true --outputPath=docs --base-href=/fecustomizer-engine/ && cp docs/index.html docs/404.html"
   },
   "private": true,
   "dependencies": {
