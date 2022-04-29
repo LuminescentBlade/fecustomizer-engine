@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { loadImagesFromLocal } from '../functions';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import {
-  FECBodyConfig,
-  FECConfig,
-  FECImageCache,
+  FECCustomizationOption,
   FECImagePathConfig,
   FECLoaderBodyChildOptions,
   FECLoaderBodyConfig,
   FECLoaderBodyOptionItem,
   FECLoaderBodyType,
   FECLoaderConfig,
-  FECLoaderOptions
+  FECLoaderOptions,
+  FECImageCache,
+  FECConfigLoad,
+  FECImageLoad
 } from '../models';
 
 @Injectable({
@@ -20,14 +21,67 @@ export class LoaderService {
 
   constructor() { }
 
-  async getConfig(input: FECLoaderOptions): Promise<FECConfig[]> {
+  getConfig(input: FECLoaderOptions): Observable<FECConfigLoad> {
     const assetConfig = this.generateImagePathConfig(input);
-    const assets = await loadImagesFromLocal(assetConfig);
-    return this.generateConfig(input.bodyOptions, {
-      baseKey: input.rootKey,
-      assets,
-      menuOrder: input.menuOrder
+    return this.loadImagesFromLocal(assetConfig).pipe(
+      map((result: FECImageLoad) => {
+        const complete = result.loaded / result.count;
+        const images: FECImageCache | null = result.images;
+        if (!images) {
+          return { complete, data: null };
+        } else {
+          const bodyConfig = this.generateConfig(input.bodyOptions, {
+            baseKey: input.rootKey,
+            assets: images,
+            menuOrder: input.menuOrder
+          });
+          return {
+            complete,
+            data:{
+              dimensions: input.dimensions,
+              options: bodyConfig,
+              menuOrder: input.menuOrder,
+              layerOrder: input.layerOrder
+            }
+          }
+        }
+      })
+    )
+  }
+
+  loadImagesFromLocal(config: FECImagePathConfig): Observable<FECImageLoad> {
+    const imageConfigs: any[] = [];
+    const images: FECImageCache = {};
+    const recursiveLoad = (currentPath: string, currentKey: string | null, currentConfig: FECImagePathConfig) => {
+      const nextKey = currentKey ? `${currentKey} ${currentConfig.name}` : currentConfig.name;
+      const nextPath = [currentPath, currentConfig.path].join('/');
+      if (currentConfig.subCategories?.length) {
+        for (const item of currentConfig.subCategories) {
+          recursiveLoad(nextPath, nextKey, item);
+        }
+      } else {
+        const loadImage = { key: nextKey, path: nextPath };
+        imageConfigs.push(loadImage);
+      }
+    };
+    recursiveLoad('', null, config);
+    const results = new BehaviorSubject<any>({ count: imageConfigs.length, loaded: 0, images: null });
+    let numLoaded = 0;
+    imageConfigs.forEach(config => {
+      const image = new Image();
+      image.addEventListener('load', () => {
+        images[config.key] = image;
+        numLoaded++;
+        if (numLoaded === imageConfigs.length) {
+          results.next({ count: imageConfigs.length, loaded: numLoaded, images: images });
+          results.complete();
+        } else {
+          results.next({ count: imageConfigs.length, loaded: numLoaded, images: null });
+        }
+      });
+      image.src = config.path;
     });
+    return results.asObservable();
   }
 
   /**
@@ -154,6 +208,7 @@ export class LoaderService {
     const key = `${config.baseKey} ${bodyTypeName} ${optionName}`
     return {
       ...this.getConfigWithTitle(optionName, option),
+      canBeBlank: true, // by default with toggles
       assets: config.assets[key]
     }
   };
@@ -163,7 +218,7 @@ export class LoaderService {
     optionName: string,
     option: FECLoaderBodyOptionItem,
     config: FECLoaderConfig
-  ): FECBodyConfig {
+  ): FECCustomizationOption {
     const result = this.getConfigWithTitle(optionName, option);
     const key = `${config.baseKey} ${bodyTypeName} ${result.name}`;
     return {
@@ -174,7 +229,7 @@ export class LoaderService {
 
   private getNullOptionConfig(
     optionName: string,
-  ): FECBodyConfig {
+  ): FECCustomizationOption {
     return {
       ...this.getConfigWithTitle(optionName),
       assets: null,
@@ -220,20 +275,24 @@ export class LoaderService {
     return items;
   };
 
-  private getConfigWithTitle(optionName: string, options?: FECLoaderBodyOptionItem) {
+  private getConfigWithTitle(optionName: string, options?: FECLoaderBodyOptionItem): FECCustomizationOption {
     if (!options) {
       return {
         name: optionName,
         title: '--',
+        //@ts-ignore,
         offset: null,
-        canBeBlank: true
+        canBeBlank: true,
+        assets: null
       }
     }
-    const baseConfig = {
+    const baseConfig: FECCustomizationOption = {
       name: optionName,
       title: options.title,
       offset: options.offset,
-      canBeBlank: options.canBeBlank || false
+      canBeBlank: options.canBeBlank || false,
+      colorSettings: options.colorSettings,
+      assets: null
     };
     if (options.childOptions) {
       return {

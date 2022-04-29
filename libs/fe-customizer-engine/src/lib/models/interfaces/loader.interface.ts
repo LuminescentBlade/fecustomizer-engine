@@ -1,8 +1,12 @@
+import { FECColorSettings, FECCoordinates } from "./common.interface"
+
 export interface FECLoaderOptions {
     rootKey: string,
     rootPath: string,
     imageType: string,
     menuOrder: string[],
+    layerOrder: string[],
+    dimensions: FECCoordinates,
     bodyOptions: FECLoaderBodyConfig
 }
 export interface FECLoaderBodyConfig {
@@ -29,6 +33,7 @@ export interface FECLoaderBodyOptionItem {
     count?: number,
     toggleable?: boolean,
     canBeBlank?: boolean,
+    colorSettings?: FECColorSettings
 }
 
 export interface FECLoaderBodyChildOptions{
@@ -44,4 +49,16 @@ export interface FECLoaderConfig {
     baseKey: string,
     assets: FECImageCache,
     menuOrder: string[]
+}
+
+export interface FECImagePathConfig {
+    name: string,
+    path?: string,
+    subCategories?: FECImagePathConfig[]
+}
+
+export interface FECImageLoad{
+    count: number,
+    loaded: number,
+    images: FECImageCache | null
 }

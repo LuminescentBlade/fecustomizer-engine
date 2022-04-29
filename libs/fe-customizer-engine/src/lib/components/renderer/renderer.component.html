@@ -1,6 +1,38 @@
 <ng-container *ngIf="config; else loading">
-    loaded
+    <div 
+        class="fec-renderer__canvas-container"
+        [ngStyle]="{'height': config.dimensions.y, 'width':config.dimensions.x}"
+    >
+        <canvas class="fec-renderer__canvas" #canvas [height]="config.dimensions.y" [width]="config.dimensions.x"></canvas>
+    </div>
+    <div class="fec-renderer__controls">
+        <fec-options-select 
+            [title]="currentBodyType.title"
+            [min]="min"
+            [max]="max"
+            [value]="bodyTypeIndex"
+            (valueChange)="bodyTypeIndex = $event"
+        ></fec-options-select>
+    
+    <ul class="fec-renderer__options">
+        <li *ngFor="let menuItem of currentBodyType.config">
+            <fec-layer-renderer 
+                [data]="menuItem" 
+                [index]="optionIndices[menuItem.name]"
+                [dependsOnIndex]="menuItem.dependsOn != null ? optionIndices[menuItem.dependsOn]: null"
+                [layerSize]="config.dimensions"
+                [colorValue]="colorCache[menuItem.name]"
+                (layer)="onLayerRender($event, menuItem.name)"
+                (indexChange)="onIndexChange($event, menuItem.name)"
+                (colorChange)="onColorChange($event, menuItem.name)"
+                (randFunction)="setOptionRandomFunction($event, menuItem.name)"
+                (colorRandFunction)="setColorRandomFunction($event, menuItem.name)"
+            ></fec-layer-renderer>
+        </li>
+    </ul>
+    <button (click)="getRandom()">Randomize!</button>
+    </div>
 </ng-container>
 <ng-template #loading>
-    loading
+    loading {{complete | percent}}
 </ng-template>

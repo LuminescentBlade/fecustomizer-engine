@@ -1,1 +1,1 @@
-export * from './loader.functions';
+export * from './math.functions';

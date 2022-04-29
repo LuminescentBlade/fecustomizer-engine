@@ -1,9 +1,17 @@
+import { FECColorSettings, FECCoordinates } from "./common.interface";
+
 export interface FECConfig {
+    options: FECBodyType[],
+    menuOrder: string[],
+    layerOrder: string[],
+    dimensions: FECCoordinates,
+}
+export interface FECBodyType {
     bodyType: string,
     title: string,
-    config: FECBodyConfig[]
+    config: FECCustomizationOption[]
 };
-export interface FECBodyConfig {
+export interface FECCustomizationOption {
     name: string,
     title: string,
     offset: FECCoordinates | null,
@@ -13,20 +21,7 @@ export interface FECBodyConfig {
     assets: null | HTMLImageElement | HTMLImageElement[] | HTMLImageElement[][],
     colorSettings?: FECColorSettings
 }
-
-export interface FECColorSettings {
-    options?: string[]; // hexcode discrete options
-    // TODO: future options, uncomment later
-    // useColorPicker?: boolean // add a full colorpicker
-    // renderFunction?: (inputs: any)=>{ } // add custom color overlay function
-}
-export interface FECImagePathConfig {
-    name: string,
-    path?: string,
-    subCategories?: FECImagePathConfig[]
-}
-
-export interface FECCoordinates{
-    x: number,
-    y: number
+export interface FECConfigLoad {
+    complete: number,
+    data: FECConfig | null
 }

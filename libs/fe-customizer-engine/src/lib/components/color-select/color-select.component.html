@@ -1,0 +1,9 @@
+<ng-container *ngIf="colorListOptions">
+    <fec-options-select 
+        [title]="title"
+        [value]="value || 0"
+        [min]="colorListOptions.min"
+        [max]="colorListOptions.max"
+        (valueChange)="onColorListSelect($event)"
+    ></fec-options-select>
+</ng-container>

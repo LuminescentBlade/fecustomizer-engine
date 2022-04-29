@@ -1,0 +1,15 @@
+<button
+    class="fec-options-select__button fec-options-select__previous" 
+    [disabled]="disabled"
+    (click)="previous()">
+    back
+</button>
+<div class="fec-options-select__title">
+    {{title}}    
+</div>
+<button 
+    class="fec-options-select__button fec-options-select__next" 
+    [disabled]="disabled" 
+    (click)="next()">
+    next
+</button>
