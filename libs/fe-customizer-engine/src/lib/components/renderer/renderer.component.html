@@ -21,11 +21,16 @@
                 [index]="optionIndices[menuItem.name]"
                 [dependsOnIndex]="menuItem.dependsOn != null ? optionIndices[menuItem.dependsOn]: null"
                 [layerSize]="config.dimensions"
+                [colorValue]="colorCache[menuItem.name]"
                 (layer)="onLayerRender($event, menuItem.name)"
                 (indexChange)="onIndexChange($event, menuItem.name)"
+                (colorChange)="onColorChange($event, menuItem.name)"
+                (randFunction)="setOptionRandomFunction($event, menuItem.name)"
+                (colorRandFunction)="setColorRandomFunction($event, menuItem.name)"
             ></fec-layer-renderer>
         </li>
     </ul>
+    <button (click)="getRandom()">Randomize!</button>
     </div>
 </ng-container>
 <ng-template #loading>

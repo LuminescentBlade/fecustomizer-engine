@@ -3,7 +3,8 @@
     width: 100%;
 }
 
-.fec-options-select__title {
+.fec-options-select__title, .fec-options-select__action {
     flex: 1;
     text-align: center;
+    position: relative;
 }

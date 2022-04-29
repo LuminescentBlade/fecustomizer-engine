@@ -4,5 +4,18 @@
     [value]="index"
     [min]="min"
     [max]="max"
-    (valueChange)="indexChange.emit($event)"
+    (valueChange)="setIndex($event)"
 ></fec-options-select>
+
+<ng-container *ngIf="data.colorSettings">
+    <fec-color-select
+        [colorSettings]="data.colorSettings"
+        [baseTitle]="data.title"
+        [value]="colorValue"
+        [renderItem]="currentRenderItem!"
+        [canvasSize]="layerSize"
+        (result)="onColorChange($event)"
+        (colorOptions)="colorChange.emit($event)"
+        (randFunction)="colorRandFunction.emit($event)"
+    ></fec-color-select>
+</ng-container>

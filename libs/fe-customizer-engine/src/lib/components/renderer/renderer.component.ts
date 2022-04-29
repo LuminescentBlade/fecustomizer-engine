@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
+import { getRandomFrom } from '../../functions';
 import { FECBodyType, FECConfig, FECCustomizationOption } from '../../models';
 
 @Component({
@@ -16,6 +17,7 @@ export class RendererComponent implements OnInit {
       this.currentBodyType = config.options[this.bodyTypeIndex];
       this.optionIndices = {};
       this.renderCache = {};
+      this.colorCache = {};
       this.currentBodyType.config
         .forEach((menuItem: FECCustomizationOption) => {
           this.optionIndices[menuItem.name] = menuItem.canBeBlank ? -1 : 0;
@@ -25,7 +27,7 @@ export class RendererComponent implements OnInit {
 
       this.canvas.height = y;
       this.canvas.width = x;
-      this.max = config.options.length -1;
+      this.max = config.options.length - 1;
     }
   };
   get config() {
@@ -56,6 +58,9 @@ export class RendererComponent implements OnInit {
   public currentBodyType: FECBodyType;
   public optionIndices: { [key: string]: number } = {};
   public renderCache: { [key: string]: HTMLCanvasElement | null } = {};
+  public colorCache: { [key: string]: any } = {};
+  private optionRandFunc: { [key: string]: () => number } = {};
+  private colorRandFunc: { [key: string]: () => any } = {};
   public min = 0;
   public max = 0;
 
@@ -84,6 +89,13 @@ export class RendererComponent implements OnInit {
     this.optionIndices[name] = $event;
   }
 
+  onColorChange($event: any, name: string) {
+    if (!this.renderCache[name]) {
+      this.canvasFilledCount++;
+    }
+    this.colorCache[name] = $event;
+  }
+
   render() {
     // only render when we have all items. with the way this is setup, even empty options
     // should give a blank canvas and not null.
@@ -110,5 +122,41 @@ export class RendererComponent implements OnInit {
   drawToCanvas(image: HTMLCanvasElement) {
     this.renderCtx!.clearRect(0, 0, this.config.dimensions.x, this.config.dimensions.y);
     this.renderCtx!.drawImage(image, 0, 0);
+  }
+
+  getRandom() {
+    const newBodyType = getRandomFrom(this.min, this.max);
+    this.config.menuOrder.forEach(item => {
+      const randFunction = this.optionRandFunc[item];
+      const newVal = randFunction();
+      const colorRandFunction = this.colorRandFunc[item];
+      const newColor = colorRandFunction ? colorRandFunction() : undefined;
+      if (this.optionIndices[item] !== newVal || this.colorCache[item] !== newColor) {
+        this.canvasFilledCount--;
+        this.renderCache[item] = null;
+      }
+      this.optionIndices[item] = newVal;
+      this.colorCache[item] = newColor;
+    });
+    if (newBodyType !== this.bodyTypeIndex) {
+      // all new items
+      this.canvasFilledCount = 0;
+      this.bodyTypeIndex = newBodyType;
+      this.renderCache = {};
+    }
+    this.optionIndices = { ...this.optionIndices };
+    this.colorCache = { ...this.colorCache };
+  }
+
+  setOptionRandomFunction($event: () => number, name: string) {
+    this.optionRandFunc[name] = $event;
+  }
+
+  setColorRandomFunction($event: () => any, name: string) {
+    this.colorRandFunc[name] = $event;
+  }
+
+  trackByIndex(index: number, item: any) {
+    return index;
   }
 }

@@ -12,8 +12,8 @@ export class OptionsSelectComponent implements OnInit {
   @Input() value: number;
   @Input() min: number;
   @Input() max: number;
+  @Input() enableMenu: boolean = false;
   @Output() valueChange = new EventEmitter<number>();
-  
   constructor() {}
 
   ngOnInit(): void {}
