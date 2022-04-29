@@ -29,7 +29,7 @@ enum Expressions {
 })
 export class ConfigService {
   private cornKey = 'CORN';
-  private cornPath = 'assets/corn';
+  private cornPath = './assets/corn';
   private ext = 'png';
   private options = {
     [Options.Body]: {
