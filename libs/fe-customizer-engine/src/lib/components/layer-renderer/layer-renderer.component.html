@@ -1,11 +1,12 @@
 <fec-options-select 
-    [title]="title"
     [disabled]="!data.assets"
     [value]="index"
     [min]="min"
     [max]="max"
     (valueChange)="setIndex($event)"
-></fec-options-select>
+>
+    {{title}}
+</fec-options-select>
 
 <ng-container *ngIf="data.colorSettings">
     <fec-color-select

@@ -1,1 +1,18 @@
-<p>color-options-palette works!</p>
+<button 
+    class="color-options-palette__select"
+    [disabled]="disabled"
+    (click)="showPalette = !showPalette"
+>
+    {{title}}
+</button>
+<div 
+    class="color-options-palette__options" 
+    [ngClass]="{'color-options-palette__options--show': showPalette}"
+>
+    <button class="color-options-palette__item"
+        *ngFor="let color of colors, let i = index"
+        [ngClass]="{'color-options-palette__item--selected': i === index}"
+        [ngStyle]="{'background-color':color}"
+        (click)="indexSelected.emit(i); showPalette = false"
+    ></button>
+</div>

@@ -8,7 +8,6 @@ import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@an
 export class OptionsSelectComponent implements OnInit {
   @HostBinding('class.fec-options-select') baseClass = true;
   @HostBinding('class.fec-options-select--disabled') @Input() disabled = false;
-  @Input() title: string = '--';
   @Input() value: number;
   @Input() min: number;
   @Input() max: number;

@@ -7,12 +7,13 @@
     </div>
     <div class="fec-renderer__controls">
         <fec-options-select 
-            [title]="currentBodyType.title"
             [min]="min"
             [max]="max"
             [value]="bodyTypeIndex"
             (valueChange)="bodyTypeIndex = $event"
-        ></fec-options-select>
+        >
+            {{currentBodyType.title}}
+        </fec-options-select>
     
     <ul class="fec-renderer__options">
         <li *ngFor="let menuItem of currentBodyType.config">
