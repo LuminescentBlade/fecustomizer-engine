@@ -30,7 +30,7 @@ enum Expressions {
 })
 export class ConfigService {
   private cornKey = 'CORN';
-  private cornPath = this._baseHref + '/assets/corn';
+  private cornPath = ['.',this._baseHref.split('/').join(''),'assets/corn'].join('/');
   private ext = 'png';
   private options = {
     [Options.Body]: {
