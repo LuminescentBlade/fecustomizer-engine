@@ -12,6 +12,6 @@ export class AppComponent implements OnInit {
   constructor(private configService: ConfigService) { }
 
   async ngOnInit() {
-    this.config$ = this.configService.getConfig();
+    this.config$ = this.configService.getCorrinConfig();
   }
 }
