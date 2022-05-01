@@ -1,7 +1,7 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { LoaderService, FECLoaderBodyConfig, FECLoaderOptions, FECConfigLoad } from 'fe-customizer-engine';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ConfigKey, corrinConfigs } from '../config';
 
 @Injectable({
@@ -28,7 +28,7 @@ export class ConfigService {
   // cache data here
   // setting up ngrx for this project is probably overkill. If we ever do
   // set up ngrx then move this there.
-  private data: { [key: string]: Observable<FECConfigLoad> | null } = {
+  private data: { [key: string]: FECConfigLoad | null } = {
     [ConfigKey.Corrin]: null,
     [ConfigKey.Robin]: null,
     [ConfigKey.Kris]: null
@@ -37,14 +37,17 @@ export class ConfigService {
   constructor(private loader: LoaderService, @Inject(APP_BASE_HREF) private _baseHref: string) { }
 
   getCorrinConfig() {
-    const cachedCorn$ = this.data[ConfigKey.Corrin];
-    if(cachedCorn$){
-      return cachedCorn$;
+    const cachedCorn = this.data[ConfigKey.Corrin];
+    if(cachedCorn){
+      return of(cachedCorn);
     } else {
       const corn$ = this.loader.getConfig(this.cornConfig);
-      this.data[ConfigKey.Corrin] = corn$;
       return corn$;
     } 
+  }
+
+  cacheCorn(value:FECConfigLoad){
+    this.data[ConfigKey.Corrin] = value;
   }
 
   getBasePath(path: string) {

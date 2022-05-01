@@ -1,1 +1,10 @@
-<p>kamui works!</p>
+<header class="kamui-customizer__header">
+    <img class="kamui-customizer__fates-logo" src="./assets/ui/corn/logo.svg"/>
+    <h1>KamuiCustomizer V2.0</h1>
+</header>
+<fec-renderer 
+    *ngIf="config"
+    class="kamui-customizer__renderer" 
+    [config]="config.data"
+    [complete]="config.complete"
+></fec-renderer>

@@ -3,8 +3,33 @@
     width: 100%;
 }
 
-.fec-options-select__title, .fec-options-select__action {
+.fec-options-select__title,
+.fec-options-select__action {
     flex: 1;
     text-align: center;
     position: relative;
+}
+
+.fec-options-select__previous {
+    &:before {
+        display: block;
+        content: '';
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-right: 7px solid #111;
+    }
+}
+
+.fec-options-select__next {
+    &:before {
+        display: block;
+        content: '';
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-left: 7px solid #111;
+    }
 }

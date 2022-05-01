@@ -31,9 +31,12 @@
             ></fec-layer-renderer>
         </li>
     </ul>
-    <button (click)="getRandom()">Randomize!</button>
+    <button class="fec-renderer__randomize" (click)="getRandom()">Randomize!</button>
     </div>
 </ng-container>
 <ng-template #loading>
-    loading {{complete | percent}}
+    <!--todo: custom loading setup using ng-content-->
+    <div class="fec-renderer__loading">
+        loading {{complete | percent}}
+    </div>
 </ng-template>

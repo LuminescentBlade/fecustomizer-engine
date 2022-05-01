@@ -1,0 +1,257 @@
+$brown1: #450900;
+$brown2: #774314;
+$brown3: #844b27;
+$peach: #ffdabd;
+$yellow1: #fce9a7;
+$yellow2: #f4d481;
+$yellow3: #d7a75d;
+$yellow4: #cea758;
+$orange: #9f4a23;
+$red-orange: #f5422e;
+$red-brown: #a3350e;
+
+$option-spacing: 6px;
+$wrap-border: 12px;
+
+@mixin fates-bg() {
+	background-color: $yellow3;
+	border: 1px solid $orange;
+	box-shadow: inset 0 0 20px 10px $orange, 0 3px 2px rgba(0, 0, 0, 0.5);
+}
+
+@mixin fates-font($color:$brown1) {
+	font-family: fot-chiaro-std, sans-serif;
+	font-size: 14px;
+	line-height: 16px;
+	color: $color;
+}
+
+@keyframes kc-color-button-anim {
+	0%{
+		box-shadow: inset 0 0 5px 2px rgba(255,255,255,0.7);
+	}
+	50%{
+		box-shadow: inset 0 0 0 0 rgba(255,255,255,0);
+	}
+	100%{
+		box-shadow: inset 0 0 5px 2px rgba(255,255,255,0.7);
+	}
+}
+
+.kamui-customizer {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+	width: 100%;
+	align-items: center;
+	font-family: fot-chiaro-std, sans-serif;
+	font-size: 14px;
+	line-height: 16px;
+	padding: 24px;
+
+	.kamui-customizer__header {
+		position: relative;
+		min-width: 300px;
+
+		h1 {
+			font-weight: 700;
+			font-size: 40px;
+			line-height: 48px;
+			text-align: center;
+			margin-top: 24px;
+			margin-bottom: 8px;
+			color: $brown1;
+		}
+	}
+
+	.kamui-customizer__fates-logo {
+		position: absolute;
+		width: 200px;
+		z-index: -1;
+		left: 50%;
+		transform: translateX(-50%);
+		fill: $brown3;
+	}
+
+	.kamui-customizer__renderer.fec-renderer {
+		margin: $wrap-border;
+		position: relative;
+		box-sizing: border-box;
+		max-width: 100%;
+		min-width: 300px;
+		padding: 0;
+		flex-direction: row;
+		gap: $option-spacing;
+		background: rgb(113, 228, 247);
+		background: linear-gradient(180deg,
+				rgba(113, 228, 247, 1) 0%,
+				rgba(62, 180, 238, 1) 10%,
+				rgba(23, 96, 113, 1) 20%,
+				rgba(10, 56, 71, 1) 49%,
+				rgba(1, 32, 34, 1) 78%,
+				rgba(13, 49, 71, 1) 85%,
+				rgba(89, 116, 133, 1) 91%,
+				rgba(146, 159, 167, 1) 100%);
+		border: 3px solid $brown1;
+		border-radius: 2px;
+
+		&::after {
+			content: '';
+			position: absolute;
+			padding: $wrap-border;
+			height: 100%;
+			width: 100%;
+			top: -$wrap-border;
+			left: -$wrap-border;
+			z-index: -1;
+			background: rgb(132, 75, 39);
+			background: linear-gradient(180deg, rgba(132, 75, 39, 1) 0%, rgba(244, 212, 129, 1) 34%, rgba(244, 212, 129, 1) 46%, rgba(132, 75, 39, 1) 100%);
+			border: 1px solid $brown1;
+		}
+
+		.fec-renderer__loading{
+			padding: 24px;
+			color: $peach;
+			font-size: 48px;
+			line-height: 48px;
+			background-color: rgba(0,0,0,0.7);
+		}
+
+		.fec-renderer__canvas-container {
+			display: flex;
+			transform: rotateY(180deg);
+			align-self: flex-end;
+
+			canvas {
+				margin: 0;
+				padding: 0;
+			}
+		}
+
+		.fec-renderer__controls {
+			border-radius: 3px;
+			padding: 12px;
+			@include fates-bg();
+			margin: 12px;
+		}
+
+		.fec-renderer__options {
+			display: flex;
+			flex-direction: column;
+			padding: 0;
+			margin: $option-spacing 0;
+			gap: $option-spacing;
+		}
+
+		.fec-options-select {
+			height: 20px;
+			gap: 3px;
+		}
+
+		fec-color-select {
+			margin-top: $option-spacing;
+		}
+
+		.fec-options-select__title {
+			box-shadow: inset 0 0 10px $yellow4, 0 0 20px $yellow2;
+			background: $yellow1;
+			color: $brown1;
+			border-radius: 5px;
+			padding: 0;
+			border: 1px solid $yellow4;
+		}
+
+		.fec-options-select__title .color-options-palette__select {
+			border: 0;
+			background: 0;
+			animation: 3s infinite linear kc-color-button-anim;
+			@include fates-font();
+			cursor:pointer;
+			border-radius: 3px;
+			&:hover{
+				background: rgba(255,255,255,0.5);
+			}
+		}
+
+		.fec-options-select__button {
+			position: relative;
+			border: 1px solid $brown2;
+			box-shadow: inset 0 0 5px $brown2;
+			background-color: $brown1;
+			color: $peach;
+			border-radius: 5px;
+			z-index: 2;
+			cursor: pointer;
+			&:hover{
+				background: $red-orange;
+				border: 1px solid $red-brown;	
+			}
+		}
+
+		.fec-options-select--disabled {
+			opacity: 0.5;
+			.fec-options-select__button:hover{
+				background: $brown1;
+				border: 1px solid $brown2;
+			}
+
+			.fec-options-select__button {
+				cursor: default;
+			}
+		}
+
+		.fec-options-select__previous:before {
+			border-right-color: $peach;
+		}
+
+		.fec-options-select__next:before {
+			border-left-color: $peach;
+		}
+
+		.color-options-palette__options {
+			background-color: $yellow1;
+			border-radius: 5px;
+			box-shadow: inset 0 0 5px 0px $yellow4, 0 3px 2px rgba(0, 0, 0, 0.2);
+		}
+
+		.fec-renderer__randomize {
+			position: relative;
+			@include fates-font($yellow1);
+			background: #07431f;
+			box-shadow: inset 0 0 1px 0px rgb(255, 255, 255, 0.7), 0 3px 2px rgba(0, 0, 0, 0.2);
+			border: 1px solid rgba(0, 0, 0, 0.3);
+			z-index: 2;
+			border-radius: 3px;
+			padding: 3px;
+			cursor: pointer;
+			&:hover{
+				background: $red-orange;
+			}
+		}
+	}
+
+	@media screen and (max-width: 600px) {
+		padding: 24px 0px;
+		.kamui-customizer__header{
+			margin-top: 12px;
+		}
+		.kamui-customizer__renderer.fec-renderer {
+			flex-direction: column;
+			padding: 12px;
+			gap: 0px;
+			.fec-renderer__controls {
+				margin: 0;
+			}
+		}
+	}
+
+	@media screen and (max-width: 360px) {
+		.kamui-customizer__header h1 {
+			font-size: 36px;
+			line-height: 40px;
+		}
+		.kamui-customizer__renderer.fec-renderer {
+			padding: 6px;
+		}
+	}
+}

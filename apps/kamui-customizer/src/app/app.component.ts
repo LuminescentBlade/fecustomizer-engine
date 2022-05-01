@@ -7,11 +7,7 @@ import { ConfigService } from './services/config.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public config$: Observable<any>;
+  constructor() { }
 
-  constructor(private configService: ConfigService) { }
-
-  async ngOnInit() {
-    this.config$ = this.configService.getCorrinConfig();
-  }
+  ngOnInit() {}
 }

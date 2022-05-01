@@ -1,8 +1,8 @@
 <button
     class="fec-options-select__button fec-options-select__previous" 
     [disabled]="disabled"
-    (click)="previous()">
-    back
+    (click)="previous()"
+    aria-label="previous option">
 </button>
 <div class="fec-options-select__title">
     <ng-content></ng-content>
@@ -10,6 +10,7 @@
 <button 
     class="fec-options-select__button fec-options-select__next" 
     [disabled]="disabled" 
-    (click)="next()">
-    next
+    (click)="next()"
+    aria-label="next option">
+    
 </button>

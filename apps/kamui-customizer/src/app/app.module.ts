@@ -4,11 +4,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FeCustomizerEngineModule } from 'fe-customizer-engine';
 import { AppComponent } from './app.component';
 import { KamuiComponent } from './routes/kamui/kamui.component';
-import { KamuiCustomizerComponent } from './component/kamui-customizer/kamui-customizer.component';
+import { RouterModule } from '@angular/router';
+import { HomeComponent } from './routes/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, KamuiComponent, KamuiCustomizerComponent],
-  imports: [BrowserModule, FeCustomizerEngineModule],
+  declarations: [AppComponent, KamuiComponent, HomeComponent],
+  imports: [
+    BrowserModule,
+    FeCustomizerEngineModule,
+    RouterModule.forRoot([
+      {
+        path: 'kamui',
+        component: KamuiComponent
+      },
+      {
+        path: '',
+        component: HomeComponent
+      },
+    ])
+  ],
   providers: [
     {
       provide: APP_BASE_HREF,
