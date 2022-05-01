@@ -18,6 +18,7 @@
     "paths": {
       "@fecustomizer-engine/common": ["libs/common/src/index.ts"],
       "@fecustomizer-engine/kamui": ["libs/kamui/src/index.ts"],
+      "@fecustomizer-engine/robin": ["libs/robin/src/index.ts"],
       "fe-customizer-engine": ["libs/fe-customizer-engine/src/index.ts"]
     }
   },

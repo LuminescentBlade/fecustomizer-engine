@@ -68,7 +68,7 @@ export class RendererComponent implements OnInit {
   public max = 0;
 
   private _config: FECConfig | null;
-  private _bodyTypeIndex: number = 2;
+  private _bodyTypeIndex: number = 0;
   private canvas = document.createElement('canvas');
   private ctx = this.canvas.getContext('2d');
   private renderCtx: CanvasRenderingContext2D | null;

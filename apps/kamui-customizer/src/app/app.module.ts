@@ -15,6 +15,10 @@ import { HomeComponent } from './routes/home/home.component';
         loadChildren: () => import('libs/kamui/src/lib/kamui.module').then(m => m.KamuiModule)
       },
       {
+        path: 'robin',
+        loadChildren: () => import('libs/robin/src/lib/robin.module').then(m => m.RobinModule)
+      },
+      {
         path: '',
         component: HomeComponent
       },
