@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/robin",
+  "sourceRoot": "libs/robin/src",
+  "prefix": "fecustomizer-engine",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/robin"],
+      "options": {
+        "jestConfig": "libs/robin/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/robin/src/**/*.ts",
+          "libs/robin/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

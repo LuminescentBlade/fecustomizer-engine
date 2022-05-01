@@ -21,7 +21,11 @@ export class ConfigService {
     bodyOptions: corrinConfigs.bodOptions
   };
 
-  constructor(private loader: LoaderService, private store: StoreService, private baseHref: BaseHrefService) { }
+  constructor(
+    private loader: LoaderService,
+    private store: StoreService,
+    private baseHref: BaseHrefService
+  ) { }
 
   getCorrinConfig() {
     const cachedCorn = this.store.getConfig(corrinConfigs.key);

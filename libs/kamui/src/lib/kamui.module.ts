@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { KamuiComponent } from './containers/kamui.component';
+import { KamuiComponent } from './containers/kamui/kamui.component';
 import { FeCustomizerEngineModule } from 'fe-customizer-engine';
 
 @NgModule({

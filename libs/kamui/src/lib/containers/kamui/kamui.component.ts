@@ -1,7 +1,7 @@
 import { Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FECConfigLoad, FileService } from 'fe-customizer-engine';
 import { Observable, Subscription } from 'rxjs';
-import { ConfigService } from '../services/config.service';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'fecustomizer-engine-kamui',

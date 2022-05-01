@@ -11,6 +11,10 @@ export class HomeComponent implements OnInit {
       title: 'KamuiCustomizer',
       path: 'kamui',
       image: './assets/ui/home/corn.png'
+    },{
+      title: 'RobinCustomizer',
+      path: 'robin',
+      image: './assets/ui/home/robin.png'
     }
   ];
   constructor() {}

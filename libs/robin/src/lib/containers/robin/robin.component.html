@@ -1,0 +1,7 @@
+<fec-renderer 
+    *ngIf="config"
+    class="kamui-customizer__renderer" 
+    [config]="config.data"
+    [complete]="config.complete"
+    (image)="setImage($event)"
+  ></fec-renderer>

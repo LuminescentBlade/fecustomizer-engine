@@ -95,7 +95,7 @@ const options = {
 };
 
 export const key = 'CORN';
-export const menuOrder = [Options.Body, Options.Hair, Options.HairClip, Options.Features, Options.Expressions, Options.Blush, Options.Sweat];
+export const menuOrder = [Options.Hair, Options.HairClip, Options.Body, Options.Features, Options.Expressions, Options.Blush, Options.Sweat];
 export const layerOrder = [Options.HairClip, Options.Hair, Options.Features, Options.Sweat, Options.Blush, Options.Expressions, Options.Body];
 
 export const bodOptions: FECLoaderBodyConfig = {
