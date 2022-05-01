@@ -11,6 +11,7 @@ This project is a modern rewrite of the original [KamuiCustomizer](https://lumin
 - add Customizer Home Page
 - export npm package
 - port RobinCustomizer
+- add custom config editor
 - add extended options for Corrin
   - skintone
   - eyecolor

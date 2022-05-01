@@ -1,0 +1,18 @@
+:host(.fe-customizer-app){
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    gap:12px;
+}
+.fe-customizer-app__content{
+    flex: 1;
+}
+.fe-customizer-app__footer{
+    background-color: #d4e5f0;
+    height: 36px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
