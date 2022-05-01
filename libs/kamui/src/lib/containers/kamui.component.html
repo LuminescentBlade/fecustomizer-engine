@@ -13,5 +13,5 @@
     [complete]="config.complete"
     (image)="setImage($event)"
   ></fec-renderer>
-  <button class="kamui-customizer__save" (click)="save()">Save</button>
+  <button *ngIf="config.data" class="kamui-customizer__save" (click)="save()">Save</button>
 </div>
