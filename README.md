@@ -5,18 +5,8 @@ This project is a modern rewrite of the original [KamuiCustomizer](https://lumin
 - finally adding Kris
 
 ## Done so far: 
-- reimplemented all existing KamuiCustomizer features
-- support Lazy Loading
-## To do list:
-- add Customizer Home Page
-- export npm package
-- port RobinCustomizer
-- add custom config editor
-- add extended options for Corrin
-  - skintone
-  - eyecolor
-  - full color picker hair color
-- add the same support for Robin
-- look into similar support for Kris (very different art style, may not work)
-
+- KamuiCustomizer original features
+- RobinCustomizer original features (need styling)
+- FECustomizer Hub to access all customizers
+- Lazy Loading
 
