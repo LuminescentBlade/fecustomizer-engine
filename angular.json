@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "fe-customizer-engine": "libs/fe-customizer-engine",
+    "kamui": "libs/kamui",
     "kamui-customizer": "apps/kamui-customizer",
     "kamui-customizer-e2e": "apps/kamui-customizer-e2e"
   }

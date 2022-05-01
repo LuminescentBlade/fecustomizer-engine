@@ -16,6 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@fecustomizer-engine/kamui": ["libs/kamui/src/index.ts"],
       "fe-customizer-engine": ["libs/fe-customizer-engine/src/index.ts"]
     }
   },
