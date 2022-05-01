@@ -9,6 +9,7 @@ $yellow4: #cea758;
 $orange: #9f4a23;
 $red-orange: #f5422e;
 $red-brown: #a3350e;
+$drop-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
 
 $option-spacing: 6px;
 $wrap-border: 12px;
@@ -72,6 +73,25 @@ $wrap-border: 12px;
 		left: 50%;
 		transform: translateX(-50%);
 		fill: $brown3;
+	}
+
+	.kamui-customizer__content{
+		position: relative;	
+	}
+
+	.kamui-customizer__save{
+		position: absolute;
+		top: 24px;
+		left: 24px;
+		border-radius: 10px;
+		border: rgba(0,0,0,0.5);
+		background: $brown1;
+		@include fates-font($peach);
+		padding: 3px 8px;
+		box-shadow: $drop-shadow;
+		&:hover, &:focus{
+			background: $red-orange;
+		}
 	}
 
 	.kamui-customizer__renderer.fec-renderer--loaded {
@@ -159,7 +179,7 @@ $wrap-border: 12px;
 			@include fates-font();
 			cursor:pointer;
 			border-radius: 3px;
-			&:hover{
+			&:hover, &:focus{
 				background: rgba(255,255,255,0.5);
 			}
 		}
@@ -173,7 +193,7 @@ $wrap-border: 12px;
 			border-radius: 5px;
 			z-index: 2;
 			cursor: pointer;
-			&:hover{
+			&:hover, &:focus{
 				background: $red-orange;
 				border: 1px solid $red-brown;	
 			}
@@ -202,20 +222,20 @@ $wrap-border: 12px;
 		.color-options-palette__options {
 			background-color: $yellow1;
 			border-radius: 5px;
-			box-shadow: inset 0 0 5px 0px $yellow4, 0 3px 2px rgba(0, 0, 0, 0.2);
+			box-shadow: inset 0 0 5px 0px $yellow4, $drop-shadow;
 		}
 
 		.fec-renderer__randomize {
 			position: relative;
 			@include fates-font($yellow1);
 			background: #07431f;
-			box-shadow: inset 0 0 1px 0px rgb(255, 255, 255, 0.7), 0 3px 2px rgba(0, 0, 0, 0.2);
+			box-shadow: inset 0 0 1px 0px rgb(255, 255, 255, 0.7), $drop-shadow;
 			border: 1px solid rgba(0, 0, 0, 0.3);
 			z-index: 2;
 			border-radius: 3px;
 			padding: 3px;
 			cursor: pointer;
-			&:hover{
+			&:hover, &:focus{
 				background: $red-orange;
 			}
 		}

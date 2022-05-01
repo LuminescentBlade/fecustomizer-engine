@@ -1,5 +1,5 @@
 import { Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FECConfigLoad } from 'fe-customizer-engine';
+import { FECConfigLoad, FileService } from 'fe-customizer-engine';
 import { Observable, Subscription } from 'rxjs';
 import { ConfigService } from '../services/config.service';
 
@@ -11,10 +11,16 @@ import { ConfigService } from '../services/config.service';
 })
 export class KamuiComponent implements OnInit, OnDestroy {
   @HostBinding('class.kamui-customizer') baseClass = true;
-  private config$: Observable<any>;
   public config: FECConfigLoad;
+  
+  private image: string;
   private configSubscription: Subscription;
-  constructor(private configService: ConfigService) { }
+  private config$: Observable<any>;
+
+  constructor(
+    private configService: ConfigService, 
+    private fileService: FileService
+  ) { }
 
   ngOnInit() {
     this.config$ = this.configService.getCorrinConfig();
@@ -31,5 +37,12 @@ export class KamuiComponent implements OnInit, OnDestroy {
     if (this.configSubscription) {
       this.configSubscription.unsubscribe();
     }
+  }
+
+  setImage(image: string){
+    this.image = image;
+  }
+  save(){
+    this.fileService.save(this.image, 'corn.png');
   }
 }

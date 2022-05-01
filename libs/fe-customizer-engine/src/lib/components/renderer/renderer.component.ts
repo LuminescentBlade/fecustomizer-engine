@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { getRandomFrom } from '../../functions';
 import { FECBodyType, FECConfig, FECCustomizationOption } from '../../models';
 
@@ -32,6 +32,7 @@ export class RendererComponent implements OnInit {
       this.max = config.options.length - 1;
     }
   };
+  @Output() image = new EventEmitter<string>();
   get config() {
     return this._config;
   }
@@ -124,6 +125,7 @@ export class RendererComponent implements OnInit {
   drawToCanvas(image: HTMLCanvasElement) {
     this.renderCtx!.clearRect(0, 0, this.config!.dimensions.x, this.config!.dimensions.y);
     this.renderCtx!.drawImage(image, 0, 0);
+    this.image.emit(image.toDataURL());
   }
 
   getRandom() {
