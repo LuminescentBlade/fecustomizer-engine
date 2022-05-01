@@ -1,21 +1,18 @@
 import { APP_BASE_HREF, PlatformLocation } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FeCustomizerEngineModule } from 'fe-customizer-engine';
 import { AppComponent } from './app.component';
-import { KamuiComponent } from './routes/kamui/kamui.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './routes/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, KamuiComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
-    FeCustomizerEngineModule,
     RouterModule.forRoot([
       {
         path: 'kamui',
-        component: KamuiComponent
+        loadChildren: () => import('libs/kamui/src/lib/kamui.module').then(m => m.KamuiModule)
       },
       {
         path: '',

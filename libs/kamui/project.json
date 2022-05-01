@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/kamui",
+  "sourceRoot": "libs/kamui/src",
+  "prefix": "fecustomizer-engine",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/kamui"],
+      "options": {
+        "jestConfig": "libs/kamui/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/kamui/src/**/*.ts",
+          "libs/kamui/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
