@@ -112,21 +112,22 @@ $wrap-border: 12px;
 				rgba(13, 49, 71, 1) 85%,
 				rgba(89, 116, 133, 1) 91%,
 				rgba(146, 159, 167, 1) 100%);
-		border: 3px solid $brown1;
+		border: 2px solid $brown1;
 		border-radius: 2px;
 
 		&::after {
 			content: '';
+			box-sizing: border-box;
 			position: absolute;
 			padding: $wrap-border;
-			height: 100%;
-			width: 100%;
+			height: calc(100% + #{2 * $wrap-border});
+			width: calc(100% + #{2 * $wrap-border});
 			top: -$wrap-border;
 			left: -$wrap-border;
 			z-index: -1;
 			background: rgb(132, 75, 39);
 			background: linear-gradient(180deg, rgba(132, 75, 39, 1) 0%, rgba(244, 212, 129, 1) 34%, rgba(244, 212, 129, 1) 46%, rgba(132, 75, 39, 1) 100%);
-			border: 1px solid $brown1;
+			border: 2px solid $brown1;
 		}
 
 		.fec-renderer__canvas-container {
