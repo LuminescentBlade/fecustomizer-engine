@@ -46,10 +46,11 @@ $wrap-border: 12px;
 	align-items: center;
 	font-family: fot-chiaro-std, sans-serif;
 	font-size: 14px;
+	color: $brown1;
 	line-height: 16px;
-	padding: 24px;
 
 	.kamui-customizer__header {
+		margin:12px;
 		position: relative;
 		min-width: 300px;
 
@@ -115,6 +116,8 @@ $wrap-border: 12px;
 			font-size: 48px;
 			line-height: 48px;
 			background-color: rgba(0,0,0,0.7);
+			text-align: center;
+			text-transform: capitalize;
 		}
 
 		.fec-renderer__canvas-container {
@@ -155,7 +158,6 @@ $wrap-border: 12px;
 		.fec-options-select__title {
 			box-shadow: inset 0 0 10px $yellow4, 0 0 20px $yellow2;
 			background: $yellow1;
-			color: $brown1;
 			border-radius: 5px;
 			padding: 0;
 			border: 1px solid $yellow4;
@@ -230,17 +232,24 @@ $wrap-border: 12px;
 		}
 	}
 
+	.kamui-customizer__help-text{
+		box-sizing: border-box;
+		max-width: 600px;
+		width: 100%;
+		padding: 12px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
 	@media screen and (max-width: 600px) {
-		padding: 24px 0px;
-		.kamui-customizer__header{
-			margin-top: 12px;
-		}
 		.kamui-customizer__renderer.fec-renderer {
 			flex-direction: column;
-			padding: 12px;
 			gap: 0px;
 			.fec-renderer__controls {
-				margin: 0;
+				margin: 0 0 8px;
+			}
+			.fec-renderer__canvas-container{
+				transform: none;
 			}
 		}
 	}
@@ -249,9 +258,6 @@ $wrap-border: 12px;
 		.kamui-customizer__header h1 {
 			font-size: 36px;
 			line-height: 40px;
-		}
-		.kamui-customizer__renderer.fec-renderer {
-			padding: 6px;
 		}
 	}
 }
