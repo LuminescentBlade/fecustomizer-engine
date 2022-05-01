@@ -6,9 +6,9 @@ This project is a modern rewrite of the original [KamuiCustomizer](https://lumin
 
 ## Done so far: 
 - reimplemented all existing KamuiCustomizer features
+- support Lazy Loading
 ## To do list:
 - add Customizer Home Page
-- support Lazy Loading
 - export npm package
 - port RobinCustomizer
 - add extended options for Corrin
