@@ -1,20 +1,24 @@
-:host(.fec-renderer){
+:host(.fec-renderer) {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.fec-renderer__controls{
+.fec-renderer__controls {
     display: inline-flex;
     flex-direction: column;
     width: 255px;
 }
 
-.fec-renderer__options{
-    padding: 0;
-    list-style: none;
+.fec-renderer__options {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    li{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
         width: 100%;
     }
 }
