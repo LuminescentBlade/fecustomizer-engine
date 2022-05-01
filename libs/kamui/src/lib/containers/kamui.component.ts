@@ -1,4 +1,5 @@
 import { Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { FECConfigLoad } from 'fe-customizer-engine';
 import { Observable, Subscription } from 'rxjs';
 import { ConfigService } from '../services/config.service';
 
@@ -11,7 +12,7 @@ import { ConfigService } from '../services/config.service';
 export class KamuiComponent implements OnInit, OnDestroy {
   @HostBinding('class.kamui-customizer') baseClass = true;
   private config$: Observable<any>;
-  public config: any;
+  public config: FECConfigLoad;
   private configSubscription: Subscription;
   constructor(private configService: ConfigService) { }
 

@@ -1,1 +1,13 @@
-<a [routerLink]="['kamui']">corn</a>
+<div class="fe-customizer-home__items">
+    <a 
+        *ngFor="let link of links" 
+        class="fe-customizer-home__link" 
+        [routerLink]="[link.path]">
+        <div class="fe-customizer-home__link-preview">
+            <img [src]=link.image />
+        </div>
+        <div class="fe-customizer-home__link-text">
+            {{link.title}}
+        </div>
+    </a>
+</div>

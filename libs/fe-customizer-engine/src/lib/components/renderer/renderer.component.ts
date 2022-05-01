@@ -9,11 +9,13 @@ import { FECBodyType, FECConfig, FECCustomizationOption } from '../../models';
 })
 export class RendererComponent implements OnInit {
   @HostBinding('class.fec-renderer') baseClass = true;
+  @HostBinding('class.fec-renderer--loaded') loaded = false;
   @Input() complete: number;
-  @Input() set config(config: FECConfig) {
+  @Input() set config(config: FECConfig | null) {
     this._config = config;
     if (config) {
-      const { x, y } = this.config.dimensions;
+      this.loaded = true;
+      const { x, y } = config.dimensions;
       this.currentBodyType = config.options[this.bodyTypeIndex];
       this.optionIndices = {};
       this.renderCache = {};
@@ -49,7 +51,7 @@ export class RendererComponent implements OnInit {
 
   public set bodyTypeIndex(index: number) {
     this._bodyTypeIndex = index;
-    this.currentBodyType = this.config.options[index];
+    this.currentBodyType = this.config!.options[index];
   };
   get bodyTypeIndex() {
     return this._bodyTypeIndex;
@@ -64,7 +66,7 @@ export class RendererComponent implements OnInit {
   public min = 0;
   public max = 0;
 
-  private _config: FECConfig;
+  private _config: FECConfig | null;
   private _bodyTypeIndex: number = 2;
   private canvas = document.createElement('canvas');
   private ctx = this.canvas.getContext('2d');
@@ -100,11 +102,11 @@ export class RendererComponent implements OnInit {
     // only render when we have all items. with the way this is setup, even empty options
     // should give a blank canvas and not null.
     // this way we don't render the canvas like 7 times whenever the 
-    if (this.canvasFilledCount < this.config.layerOrder.length) {
+    if (this.canvasFilledCount < this.config!.layerOrder.length) {
       return;
     }
-    this.ctx!.clearRect(0, 0, this.config.dimensions.x, this.config.dimensions.y);
-    const layerOrder = this.config.layerOrder;
+    this.ctx!.clearRect(0, 0, this.config!.dimensions.x, this.config!.dimensions.y);
+    const layerOrder = this.config!.layerOrder;
     for (let i = layerOrder.length - 1; i >= 0; i--) {
       const name = layerOrder[i];
       const item = this.renderCache[name];
@@ -120,13 +122,13 @@ export class RendererComponent implements OnInit {
   }
 
   drawToCanvas(image: HTMLCanvasElement) {
-    this.renderCtx!.clearRect(0, 0, this.config.dimensions.x, this.config.dimensions.y);
+    this.renderCtx!.clearRect(0, 0, this.config!.dimensions.x, this.config!.dimensions.y);
     this.renderCtx!.drawImage(image, 0, 0);
   }
 
   getRandom() {
     const newBodyType = getRandomFrom(this.min, this.max);
-    this.config.menuOrder.forEach(item => {
+    this.config!.menuOrder.forEach(item => {
       const randFunction = this.optionRandFunc[item];
       const newVal = randFunction();
       const colorRandFunction = this.colorRandFunc[item];

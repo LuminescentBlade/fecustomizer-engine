@@ -6,6 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  public links = [
+    {
+      title: 'KamuiCustomizer',
+      path: 'kamui',
+      image: './assets/ui/home/corn.png'
+    }
+  ];
   constructor() {}
 
   ngOnInit(): void {}
