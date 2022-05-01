@@ -1,0 +1,289 @@
+@import './../../../../../common/src/styles/color-button-anim';
+@import './../../../../../common/src/styles/fe-drop-shadow';
+
+$yellow1: #d3b56c;
+$yellow2: #bc8f3c;
+$yellow3: #f3efd4;
+$tan: #a87c3d;
+$brown1: #1c1811;
+$brown2: #31301c;
+$brown3: #4d3c21;
+$red1: #f64d29;
+$red2: #dc371b;
+$beige1: #eee6cb;
+$beige2: #d7c497;
+$option-spacing: 6px;
+$drop-shadow: 0 2px 1px 0px rgba(0, 0, 0, 0.5);
+
+@mixin robin-red-gradient {
+	background: rgb(246, 77, 41);
+	background: linear-gradient(180deg, rgba(246, 77, 41, 1) 0%, rgba(220, 55, 27, 1) 100%);
+}
+
+@mixin robin-bg {
+	border-radius: 1px;
+	padding: 12px;
+	background-color: $yellow1;
+	border: 1px solid $yellow3;
+	box-shadow:
+		inset 0 0 2px 0 rgba(0, 0, 0, 0.1),
+		inset 0 0 10px 0 $tan,
+		inset 0 0 20px 10px $yellow2,
+		0 0 1px 0 rgba(0, 0, 0, 0.3),
+		$drop-shadow;
+}
+
+.robin-customizer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.robin-customizer__header {
+	margin: 12px;
+	position: relative;
+	min-width: 300px;
+
+	h1 {
+		font-weight: 700;
+		font-size: 4rem;
+		line-height: 4.8rem;
+		text-align: center;
+		margin-top: 60px;
+		margin-bottom: 8px;
+		color: $brown1;
+	}
+
+	.robin-customizer__awaken-logo{
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 300px;
+		z-index: -1;
+	}
+}
+
+
+// font declaration
+.robin-customizer,
+.robin-customizer button {
+	font-family: fot-chiaro-std, sans-serif;
+	font-size: 1.4rem;
+	line-height: 1.6rem;
+	color: $brown3;
+}
+
+.robin-customizer__content {
+	position: relative;
+
+	.robin-customizer__renderer.fec-renderer {
+		flex-direction: row-reverse;
+		background-color: #63684c;
+
+		.fec-renderer__canvas-container {
+			display: flex;
+		}
+
+		.fec-renderer__controls {
+			align-self: flex-end;
+			margin: 12px;
+			@include robin-bg();
+		}
+
+		.fec-renderer__options {
+			gap: $option-spacing;
+			margin: $option-spacing 0;
+		}
+
+		.fec-options-select {
+			position: relative;
+			height: 24px;
+			gap: 3px;
+			border: 1px solid opacify($color: $yellow2, $amount: 0.4);
+			border-radius: 3px;
+			box-shadow: inset 0 0 2px 0 $yellow2,
+				inset 1px 1px 0px 0 rgba(0, 0, 0, 0.2);
+		}
+
+		fec-color-select {
+			margin-top: $option-spacing;
+		}
+
+		.fec-options-select__title {
+			line-height: 24px;
+		}
+
+		.fec-options-select__title .color-options-palette__select {
+			border: 0;
+			background: 0;
+			animation: 3s infinite linear color-button-anim;
+			cursor: pointer;
+			width: 100%;
+			border-radius: 3px;
+
+			&:hover,
+			&:focus {
+				background: rgba(255, 255, 255, 0.5);
+			}
+		}
+
+		.fec-options-select__button {
+			position: absolute;
+			z-index: 2;
+			cursor: pointer;
+			height: 100%;
+
+			&:hover,
+			&:active {
+				&.fec-options-select__previous::before {
+					border-right-color: $red1;
+				}
+
+				&.fec-options-select__next::before {
+					border-left-color: $red1;
+				}
+			}
+		}
+
+		.fec-options-select__previous,
+		.fec-options-select__next {
+			top: 0;
+			border: 0;
+			background: 0;
+
+			&:before {
+				position: relative;
+				z-index: 2;
+			}
+
+			&:after {
+				content: '';
+				position: absolute;
+				display: block;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 0;
+				height: 0;
+				border-top: 7px solid transparent;
+				border-bottom: 7px solid transparent;
+				margin-left: -1px;
+			}
+		}
+
+		.fec-options-select__previous {
+			left: 0;
+
+			&::before {
+				border-right-width: 5px;
+			}
+
+			&:after {
+				border-right: 7px solid $yellow3;
+			}
+		}
+
+		.fec-options-select__next {
+			right: 0;
+
+			&::before {
+				border-left-width: 5px;
+			}
+
+			&:after {
+				border-left: 7px solid $yellow3;
+			}
+		}
+
+		.color-options-palette__options {
+			border-radius: 5px;
+			z-index: 3;
+			@include robin-bg();
+		}
+
+		.fec-renderer__randomize {
+			position: relative;
+			cursor: pointer;
+			color: $brown3;
+			background: rgb(238, 230, 203);
+			background: linear-gradient(180deg, rgba(238, 230, 203, 1) 0%, rgba(215, 196, 151, 1) 100%);
+			border: 1px solid rgba(0, 0, 0, 0.5);
+			border-radius: 4px;
+			box-shadow: $drop-shadow;
+
+			&:hover,
+			&:active {
+				@include robin-red-gradient();
+				color: $beige1;
+			}
+		}
+	}
+
+	.robin-customizer__save {
+		position: absolute;
+		top: 6px;
+		right: 6px;
+		height: 24px;
+		color: $yellow3;
+		background: $brown1;
+		border: 0;
+		padding: 3px 12px;
+		border-radius: 5px;
+		box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3);
+		cursor: pointer;
+
+		&:hover,
+		&:active {
+			@include robin-red-gradient();
+			color: $beige1;
+		}
+	}
+
+	.robin-customizer__banner {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: 40px;
+		left: 0;
+		height: 30px;
+		width: 267px;
+		color: $yellow3;
+		background: $brown2;
+		border: 0;
+		text-align: right;
+		box-shadow: 0 0 3px 1px $yellow3;
+	}
+	@media screen and (max-width: 600px) {
+		.robin-customizer__renderer.fec-renderer {
+			flex-direction: column;
+			gap: 0px;
+			padding-top: 60px;
+	
+			.fec-renderer__controls {
+				margin-top: 0;
+			}
+	
+			.fec-renderer__canvas-container {
+				transform: none;
+			}
+		}
+	
+		.robin-customizer__banner {
+			top: 6px;
+		}
+	
+		.robin-customizer__save {
+			top: 48px;
+			right: 10px;
+		}
+	}
+}
+
+
+@media screen and (max-width: 360px) {
+	.robin-customizer__header h1 {
+		font-size: 36px;
+		line-height: 40px;
+	}
+}
