@@ -3,6 +3,7 @@
   "projects": {
     "common": "libs/common",
     "fe-customizer-engine": "libs/fe-customizer-engine",
+    "fe-customizer-engine-e2e": "apps/fe-customizer-engine-e2e",
     "kamui": "libs/kamui",
     "kamui-customizer": "apps/kamui-customizer",
     "kamui-customizer-e2e": "apps/kamui-customizer-e2e",

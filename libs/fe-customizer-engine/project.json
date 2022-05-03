@@ -36,6 +36,39 @@
           "libs/fe-customizer-engine/src/**/*.html"
         ]
       }
+    },
+    "storybook": {
+      "executor": "@nrwl/storybook:storybook",
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "port": 4400,
+        "config": {
+          "configFolder": "libs/fe-customizer-engine/.storybook"
+        },
+        "projectBuildConfig": "fe-customizer-engine:build-storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nrwl/storybook:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "outputPath": "dist/storybook/fe-customizer-engine",
+        "config": {
+          "configFolder": "libs/fe-customizer-engine/.storybook"
+        },
+        "projectBuildConfig": "fe-customizer-engine:build-storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
     }
   },
   "tags": []

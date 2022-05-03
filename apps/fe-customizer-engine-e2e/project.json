@@ -1,0 +1,28 @@
+{
+  "root": "apps/fe-customizer-engine-e2e",
+  "sourceRoot": "apps/fe-customizer-engine-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/fe-customizer-engine-e2e/cypress.json",
+        "devServerTarget": "fe-customizer-engine:storybook"
+      },
+      "configurations": {
+        "ci": {
+          "devServerTarget": "fe-customizer-engine:storybook:ci"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/fe-customizer-engine-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["fe-customizer-engine"]
+}
