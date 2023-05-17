@@ -9,24 +9,25 @@ import { ColorSelectComponent } from './components/color-select/color-select.com
 import { ColorOptionsPaletteComponent } from './components/color-options-palette/color-options-palette.component';
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [
-    RendererComponent,
-    OptionsSelectComponent,
-    LayerRendererComponent,
-    ColorSelectComponent,
-    ColorOptionsPaletteComponent,
-  ],
-  exports: [RendererComponent],
-  entryComponents: [RendererComponent],
-  providers: [ColorService],
+    imports: [CommonModule],
+    declarations: [
+        RendererComponent,
+        OptionsSelectComponent,
+        LayerRendererComponent,
+        ColorSelectComponent,
+        ColorOptionsPaletteComponent,
+    ],
+    exports: [RendererComponent],
+    providers: [ColorService]
 })
 export class FeCustomizerEngineModule {
   constructor(private injector: Injector) {
     const customElement = createCustomElement(RendererComponent, {
       injector: this.injector,
     });
-    customElements.define('fe-custom-renderer', customElement);
+    if(!customElements.get('fe-custom-renderer')){
+      customElements.define('fe-custom-renderer', customElement);
+    }
   }
 
   ngDoBoostrap() {

@@ -1,19 +1,20 @@
 {
+  "name": "robin",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/robin",
   "sourceRoot": "libs/robin/src",
   "prefix": "fecustomizer-engine",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/robin"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/robin"],
       "options": {
-        "jestConfig": "libs/robin/jest.config.js",
+        "jestConfig": "libs/robin/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/robin/src/**/*.ts",
