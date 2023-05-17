@@ -1,6 +1,7 @@
 {
+  "name": "kamui-customizer",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "root": "apps/kamui-customizer",
   "sourceRoot": "apps/kamui-customizer/src",
   "prefix": "fecustomizer-engine",
   "targets": {
@@ -83,9 +84,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/kamui-customizer"],
+      "outputs": ["{workspaceRoot}/coverage/apps/kamui-customizer"],
       "options": {
-        "jestConfig": "apps/kamui-customizer/jest.config.js",
+        "jestConfig": "apps/kamui-customizer/jest.config.ts",
         "passWithNoTests": true
       }
     }

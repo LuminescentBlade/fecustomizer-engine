@@ -1,14 +1,15 @@
 {
+  "name": "kamui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/kamui",
   "sourceRoot": "libs/kamui/src",
   "prefix": "fecustomizer-engine",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/kamui"],
+      "outputs": ["{workspaceRoot}/coverage/libs/kamui"],
       "options": {
-        "jestConfig": "libs/kamui/jest.config.js",
+        "jestConfig": "libs/kamui/jest.config.ts",
         "passWithNoTests": true
       }
     },
