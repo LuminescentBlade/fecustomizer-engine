@@ -25,7 +25,9 @@ export class FeCustomizerEngineModule {
     const customElement = createCustomElement(RendererComponent, {
       injector: this.injector,
     });
-    customElements.define('fe-custom-renderer', customElement);
+    if(!customElements.get('fe-custom-renderer')){
+      customElements.define('fe-custom-renderer', customElement);
+    }
   }
 
   ngDoBoostrap() {
