@@ -9,17 +9,16 @@ import { ColorSelectComponent } from './components/color-select/color-select.com
 import { ColorOptionsPaletteComponent } from './components/color-options-palette/color-options-palette.component';
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [
-    RendererComponent,
-    OptionsSelectComponent,
-    LayerRendererComponent,
-    ColorSelectComponent,
-    ColorOptionsPaletteComponent,
-  ],
-  exports: [RendererComponent],
-  entryComponents: [RendererComponent],
-  providers: [ColorService],
+    imports: [CommonModule],
+    declarations: [
+        RendererComponent,
+        OptionsSelectComponent,
+        LayerRendererComponent,
+        ColorSelectComponent,
+        ColorOptionsPaletteComponent,
+    ],
+    exports: [RendererComponent],
+    providers: [ColorService]
 })
 export class FeCustomizerEngineModule {
   constructor(private injector: Injector) {
