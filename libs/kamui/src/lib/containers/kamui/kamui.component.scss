@@ -37,7 +37,9 @@ $wrap-border: 12px;
 	min-height: 100%;
 	width: 100%;
 	align-items: center;
-
+	background-color: var(--fe-customizer--customizer-bg);
+	border: 2px solid var(--fe-customizer--customizer-border);
+	max-width: var(--fe-customizer--customizer-width);
 	.kamui-customizer__header {
 		margin: 12px;
 		position: relative;
@@ -57,14 +59,14 @@ $wrap-border: 12px;
 	.kamui-customizer__fates-logo {
 		position: absolute;
 		width: 200px;
-		z-index: -1;
 		left: 50%;
 		transform: translateX(-50%);
-		fill: $brown3;
+		fill: var(--fe-customizer--kamui-logo, $brown3);
 	}
 
 	.kamui-customizer__content {
 		position: relative;
+		margin-bottom: 12px;
 	}
 
 	.kamui-customizer__save {
