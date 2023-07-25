@@ -23,7 +23,7 @@ export class KamuiComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    window.parent.postMessage('customizer-kamui');
+    window.parent.postMessage('customizer-kamui', '*');
     this.config$ = this.configService.getCorrinConfig();
     // normally I would use async pipe but since im also caching the value
     this.configSubscription = this.config$.subscribe(config => {

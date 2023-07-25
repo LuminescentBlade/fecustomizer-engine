@@ -20,6 +20,6 @@ export class HomeComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    window.parent.postMessage('customizer-home');
+    window.parent.postMessage('customizer-home', '*');
   }
 }

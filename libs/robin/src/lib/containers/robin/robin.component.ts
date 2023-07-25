@@ -23,7 +23,7 @@ export class RobinComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    window.parent.postMessage('customizer-robin');
+    window.parent.postMessage('customizer-robin', '*');
     this.config$ = this.configService.getRobinConfig();
     this.configSubscription = this.config$.subscribe(config => {
       this.config = config;
