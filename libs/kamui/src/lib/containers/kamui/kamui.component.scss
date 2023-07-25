@@ -23,11 +23,12 @@ $wrap-border: 12px;
 }
 
 // fonts
-.kamui-customizer, .kamui-customizer button{
+.kamui-customizer,
+.kamui-customizer button {
 	font-family: fot-chiaro-std, sans-serif;
 	font-size: 1.4rem;
 	line-height: 1.6rem;
-	color: $brown1;
+	color: var(--fe-customizer--kamui-text, $brown1);
 }
 
 .kamui-customizer {
@@ -36,8 +37,9 @@ $wrap-border: 12px;
 	min-height: 100%;
 	width: 100%;
 	align-items: center;
+
 	.kamui-customizer__header {
-		margin:12px;
+		margin: 12px;
 		position: relative;
 		min-width: 300px;
 
@@ -48,7 +50,7 @@ $wrap-border: 12px;
 			text-align: center;
 			margin-top: 24px;
 			margin-bottom: 8px;
-			color: $brown1;
+			color: var(--fe-customizer--kamui-text, $brown1);
 		}
 	}
 
@@ -61,21 +63,23 @@ $wrap-border: 12px;
 		fill: $brown3;
 	}
 
-	.kamui-customizer__content{
-		position: relative;	
+	.kamui-customizer__content {
+		position: relative;
 	}
 
-	.kamui-customizer__save{
+	.kamui-customizer__save {
 		position: absolute;
 		top: 24px;
 		left: 24px;
 		border-radius: 10px;
-		border: rgba(0,0,0,0.5);
+		border: rgba(0, 0, 0, 0.5);
 		background: $brown1;
 		color: $peach;
 		padding: 3px 8px;
 		box-shadow: $drop-shadow;
-		&:hover, &:active{
+
+		&:hover,
+		&:active {
 			background: $red-orange;
 		}
 	}
@@ -155,10 +159,12 @@ $wrap-border: 12px;
 			border: 0;
 			background: 0;
 			animation: 3s infinite linear color-button-anim;
-			cursor:pointer;
+			cursor: pointer;
 			border-radius: 3px;
-			&:hover, &:focus{
-				background: rgba(255,255,255,0.5);
+
+			&:hover,
+			&:focus {
+				background: rgba(255, 255, 255, 0.5);
 			}
 		}
 
@@ -171,15 +177,18 @@ $wrap-border: 12px;
 			border-radius: 5px;
 			z-index: 2;
 			cursor: pointer;
-			&:hover, &:active{
+
+			&:hover,
+			&:active {
 				background: $red-orange;
-				border: 1px solid $red-brown;	
+				border: 1px solid $red-brown;
 			}
 		}
 
 		.fec-options-select--disabled {
 			opacity: 0.5;
-			.fec-options-select__button:hover{
+
+			.fec-options-select__button:hover {
 				background: $brown1;
 				border: 1px solid $brown2;
 			}
@@ -213,13 +222,15 @@ $wrap-border: 12px;
 			border-radius: 3px;
 			padding: 3px;
 			cursor: pointer;
-			&:hover, &:active{
+
+			&:hover,
+			&:active {
 				background: $red-orange;
 			}
 		}
 	}
 
-	.kamui-customizer__help-text{
+	.kamui-customizer__help-text {
 		max-width: 600px;
 		width: 100%;
 		padding: 12px;
@@ -227,7 +238,7 @@ $wrap-border: 12px;
 		text-align: center;
 	}
 
-	.fec-renderer__loading{
+	.fec-renderer__loading {
 		padding: 24px;
 		color: $brown3;
 		font-size: 3.2rem;
@@ -240,10 +251,12 @@ $wrap-border: 12px;
 		.kamui-customizer__renderer.fec-renderer {
 			flex-direction: column;
 			gap: 0px;
+
 			.fec-renderer__controls {
 				margin: 0 0 8px;
 			}
-			.fec-renderer__canvas-container{
+
+			.fec-renderer__canvas-container {
 				transform: none;
 			}
 		}

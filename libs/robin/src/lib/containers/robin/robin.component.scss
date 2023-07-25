@@ -51,7 +51,7 @@ $drop-shadow: 0 2px 1px 0px rgba(0, 0, 0, 0.5);
 		text-align: center;
 		margin-top: 60px;
 		margin-bottom: 8px;
-		color: $brown1;
+		color: var(--fe-customizer--robin-text, $brown1);
 	}
 
 	.robin-customizer__awaken-logo{

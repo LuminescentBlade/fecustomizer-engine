@@ -7,7 +7,7 @@
 
 }
 .fe-customizer-app__header{
-    background-color: #d4e5f0;
+    background-color: var(--fe-customizer--header-footer, #d4e5f0);
     height: 48px;
     min-height: 48px;
     display: flex;
@@ -19,7 +19,7 @@
     flex: 1;
 }
 .fe-customizer-app__footer{
-    background-color: #d4e5f0;
+    background-color: var(--fe-customizer--header-footer, #d4e5f0);;
     height: 36px;
     min-height: 36px;
     display: flex;

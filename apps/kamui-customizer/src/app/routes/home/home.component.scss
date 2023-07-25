@@ -24,6 +24,7 @@
     display: inline-flex;
     flex-direction: column;
     align-items: center;
+    background-color: var(--fe-customizer--image-link, white);
 
     &:hover {
         .fe-customizer-home__link-preview{
